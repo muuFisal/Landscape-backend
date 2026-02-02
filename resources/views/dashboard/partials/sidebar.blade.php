@@ -47,7 +47,8 @@
                 <li class="nav-item @yield('admins-open') @yield('createAdmin-open')"><a class="d-flex align-items-center"
                         href="#"><i data-feather='users'></i><span class="menu-title text-truncate">
                             {{ __('dashboard.admins') }}</span>
-                        <span class="badge badge-light-warning rounded-pill ms-auto me-1">{{ App\Models\Admin::count() }}</span>
+                        <span
+                            class="badge badge-light-warning rounded-pill ms-auto me-1">{{ App\Models\Admin::count() }}</span>
                     </a>
                     <ul class="menu-content">
                         <li><a class="@yield('admins-active') d-flex align-items-center"
@@ -68,7 +69,8 @@
                 <li class="nav-item @yield('users-open') @yield('createUser-open')"><a class="d-flex align-items-center"
                         href="#"><i data-feather='users'></i><span class="menu-title text-truncate">
                             {{ __('dashboard.users') }}</span>
-                        <span class="badge badge-light-warning rounded-pill ms-auto me-1"> {{ App\Models\User::count() }} </span>
+                        <span class="badge badge-light-warning rounded-pill ms-auto me-1"> {{ App\Models\User::count() }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <li><a class="@yield('users-active') d-flex align-items-center"
@@ -83,19 +85,54 @@
 
 
             @can('settings')
-            <li class="nav-item @yield('settings-open')"><a class="d-flex align-items-center" href="#">
-                    <i data-feather="settings"></i><span class="menu-title text-truncate"
-                        data-i18n="Roles &amp; Permission">{{ __('dashboard.settings') }}</span>
-                </a>
-                <ul class="menu-content">
-                    <li><a class="@yield('settings-active') d-flex align-items-center"
-                            href="{{ route('dashboard.settings') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate"
-                                data-i18n="Roles">{{ __('dashboard.genral-setting') }}</span></a>
-                    </li>
-                </ul>
-            </li>
-        @endcan
+                <li class="nav-item @yield('settings-open')"><a class="d-flex align-items-center" href="#">
+                        <i data-feather="settings"></i><span class="menu-title text-truncate"
+                            data-i18n="Roles &amp; Permission">{{ __('dashboard.settings') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a class="@yield('settings-active') d-flex align-items-center"
+                                href="{{ route('dashboard.settings') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.genral-setting') }}</span></a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li><a class="@yield('banners-active') d-flex align-items-center"
+                                href="{{ route('dashboard.banners') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.banners') }}</span></a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li><a class="@yield('about-active') d-flex align-items-center"
+                                href="{{ route('dashboard.about.setting') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.about-setting') }}</span></a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li><a class="@yield('privacy-active') d-flex align-items-center"
+                                href="{{ route('dashboard.privacy.setting') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.privacy-setting') }}</span></a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li><a class="@yield('terms-active') d-flex align-items-center"
+                                href="{{ route('dashboard.terms.setting') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.terms-setting') }}</span></a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li><a class="@yield('faqs-active') d-flex align-items-center"
+                                href="{{ route('dashboard.faqs.setting') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate"
+                                    data-i18n="Roles">{{ __('dashboard.faqs-settings') }}</span></a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
 
         </ul>
     </div>

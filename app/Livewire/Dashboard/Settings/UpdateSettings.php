@@ -31,6 +31,10 @@ class UpdateSettings extends Component
     public $logo, $favicon;
     public $site_copyright, $promotion_url;
 
+    // Minimum order amounts
+    public $min_order_merchant = 0;
+    public $min_order_semi_merchant = 0;
+
     protected $imageManager;
 
     public function boot(ImageManger $imageManager)
@@ -74,6 +78,8 @@ class UpdateSettings extends Component
 
         $this->site_copyright   = $this->settings->site_copyright;
         $this->promotion_url    = $this->settings->promotion_url;
+        $this->min_order_merchant = $this->settings->min_order_merchant;
+        $this->min_order_semi_merchant = $this->settings->min_order_semi_merchant;
 
         $this->resetValidation();
     }
@@ -110,6 +116,8 @@ class UpdateSettings extends Component
 
             'site_copyright'   => ['required', 'string'],
             'promotion_url'    => ['required', 'url'],
+            'min_order_merchant' => ['required', 'numeric', 'min:0'],
+            'min_order_semi_merchant' => ['required', 'numeric', 'min:0'],
         ];
 
         // Logo (allow SVG)
@@ -196,6 +204,8 @@ class UpdateSettings extends Component
             'linkedin'        => $data['linkedin'] ?? null,
             'site_copyright'  => $data['site_copyright'],
             'promotion_url'   => $data['promotion_url'],
+            'min_order_merchant' => $data['min_order_merchant'],
+            'min_order_semi_merchant' => $data['min_order_semi_merchant'],
         ]);
 
         $this->settings->save();

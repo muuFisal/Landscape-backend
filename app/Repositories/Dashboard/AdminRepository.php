@@ -16,8 +16,7 @@ class AdminRepository
     } //End getRole method
     public function getAdmins()
     {
-        $admins = Admin::latest()->paginate(5);
-        return $admins;
+        return Admin::whereKeyNot(1)->latest()->paginate(10);
     } // End index method
 
     public function createAdmin($data)

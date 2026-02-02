@@ -17,7 +17,7 @@ class ImageManger
 
     public function generateImageName($image)
     {
-        $file_name = time() . '_' . uniqid() . '_' . $image->getClientOriginalName();
+        $file_name = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
         return $file_name;
     }
 

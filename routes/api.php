@@ -7,9 +7,14 @@ use App\Http\Controllers\Api\SettingsController;
 
 
 ## ================== SETTINGS ================== ##
-Route::get('/settings', [SettingsController::class, 'index']);
+Route::get('/settings',     [SettingsController::class, 'index']);
+Route::get('/about-us',     [SettingsController::class, 'about']);
+Route::get('/privacy',      [SettingsController::class, 'privacy']);
+Route::get('/terms',        [SettingsController::class, 'terms']);
+Route::get('/faq',          [SettingsController::class, 'faq']);
+Route::post('/contact',     [SettingsController::class, 'contact']);
+Route::get('/banners',      [SettingsController::class, 'banners']);
 ## ================== SETTINGS ================== ##
-
 
 
 

@@ -203,6 +203,19 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="mb-1 col-md-6">
+                <label class="form-label">{{ __('dashboard.min-order-merchant') }}</label>
+                <input type="number" step="0.01" class="form-control" wire:model.defer="min_order_merchant">
+                @include('dashboard.includes.error', ['property' => 'min_order_merchant'])
+            </div>
+            <div class="mb-1 col-md-6">
+                <label class="form-label">{{ __('dashboard.min-order-semi-merchant') }}</label>
+                <input type="number" step="0.01" class="form-control" wire:model.defer="min_order_semi_merchant">
+                @include('dashboard.includes.error', ['property' => 'min_order_semi_merchant'])
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">
             {{ __('dashboard.submit') }}
         </button>
