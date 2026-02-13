@@ -2,14 +2,10 @@
 
 namespace App\Repositories\Api\Auth;
 
-use App\Models\User;
-use App\Models\Stage;
-use Ichtrojan\Otp\Otp;
-use App\Models\Student;
-use App\Models\Teacher;
-use App\Models\ParentModel;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Notifications\SendOtpNotify;
+use Fisal\Otp\Otp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 

@@ -3,7 +3,7 @@
 namespace App\Repositories\Dashboard\Auth;
 
 use App\Models\Admin;
-use Ichtrojan\Otp\Otp;
+use Fisal\Otp\Otp;
 
 class ForgotRepository
 {

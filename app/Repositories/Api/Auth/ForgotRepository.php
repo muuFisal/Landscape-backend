@@ -3,7 +3,7 @@
 namespace App\Repositories\Api\Auth;
 
 use App\Models\User;
-use Ichtrojan\Otp\Otp;
+use Fisal\Otp\Otp;
 
 class ForgotRepository
 {
@@ -16,7 +16,7 @@ class ForgotRepository
 
 
 
-    
+
     public function getUserByPhone($phone)
     {
         return User::where('phone', $phone)->first();
