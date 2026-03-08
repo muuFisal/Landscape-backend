@@ -22,7 +22,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $credentials = $request->only(['name', 'email', 'phone', 'password', 'birth_date', 'image']);
+        $credentials = $request->only(['name', 'email', 'phone', 'password', 'birth_date', 'image' , 'country_id', 'governorate_id']);
         $user = $this->authService->register($credentials);
 
         if (!$user) {

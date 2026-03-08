@@ -52,6 +52,9 @@ class RegisterRequest extends FormRequest
             'birth_date' => 'nullable|date_format:Y-m-d',
             'password'   => 'required|string|min:8|confirmed',
             'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'country_id' => 'nullable|exists:countries,id',
+            'governorate_id' => 'nullable|exists:governorates,id',
+            
         ];
     }
 

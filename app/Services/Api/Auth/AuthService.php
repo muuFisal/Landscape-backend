@@ -2,7 +2,6 @@
 
 namespace App\Services\Api\Auth;
 
-use App\Models\User;
 use App\Utils\ImageManger;
 use App\Notifications\SendOtpNotify;
 use App\Repositories\Api\Auth\AuthRepository;
@@ -34,7 +33,7 @@ class AuthService
             return false;
         }
         // Send OTP notification after registration
-        $user->notify(new SendOtpNotify($user->phone));
+        $user->notify(new SendOtpNotify($user->email));
 
         $user->tokens()->delete(); // Delete old tokens
         return $user ? [

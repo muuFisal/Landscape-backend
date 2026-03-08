@@ -22,13 +22,15 @@ class AuthRepository
     {
 
         $user = User::create([
-            'name'        => $credentials['name'],
-            'email'       => $credentials['email'] ?? null,
-            'phone'       => $credentials['phone'],
-            'birth_date'  => $credentials['birth_date'],
-            'password'    => Hash::make($credentials['password']),
-            'status'      => 0,
-            'image'       => $credentials['image'] ?? null,
+            'name'              => $credentials['name'],
+            'email'             => $credentials['email'] ?? null,
+            'phone'             => $credentials['phone'],
+            'birth_date'        => $credentials['birth_date'],
+            'password'          => Hash::make($credentials['password']),
+            'status'            => 0,
+            'image'             => $credentials['image'] ?? null,
+            'country_id'        => $credentials['country_id'] ?? null,
+            'governorate_id'    => $credentials['governorate_id'] ?? null,
         ]);
         return $user;
     } // End method register
@@ -60,20 +62,20 @@ class AuthRepository
             ];
         }
 
-            $user->update([
-                'status' => 1,
-                'email_verified_at' => now()
-            ]);
+        $user->update([
+            'status' => 1,
+            'email_verified_at' => now()
+        ]);
 
-            $user->currentAccessToken()?->delete();
-            $token = $user->createToken('auth_token')->plainTextToken;
+        $user->currentAccessToken()?->delete();
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'status' => 200,
             'message' => __('front.otp-verified'),
             'data' => [
                 'user' => UserResource::make($user),
-                'token' => $token, // هيكون null للـ teacher
+                'token' => $token,
             ]
         ];
     } // End verifyOtp Method
@@ -100,7 +102,7 @@ class AuthRepository
         }
 
         if ($user->email_verified_at == null) {
-            $user->notify(new SendOtpNotify($user->phone));
+            $user->notify(new SendOtpNotify($user->email));
             return [
                 'status' => 415,
                 'message' => __('front.verify-account-first'),
@@ -152,7 +154,7 @@ class AuthRepository
         }
 
         // Send new OTP
-        $user->notify(new SendOtpNotify($user->phone));
+        $user->notify(new SendOtpNotify($user->email));
 
         return [
             'status' => 200,

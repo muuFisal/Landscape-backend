@@ -2,10 +2,8 @@
 
 namespace App\Services\Api\Auth;
 
-use App\Models\User;
 use App\Notifications\SendOtpNotify;
 use App\Repositories\Api\Auth\ForgotRepository;
-use Illuminate\Support\Facades\Hash;
 
 class ForgotService
 {
@@ -19,12 +17,12 @@ class ForgotService
 
 
 
-    public function sendOTP($phone)
+    public function sendOTP($email)
     {
-        $user = $this->forgotRepository->getUserByPhone($phone);
+        $user = $this->forgotRepository->getUserByEmail($email);
         if (!$user) return false;
 
-        $user->notify(new SendOtpNotify($phone));
+        $user->notify(new SendOtpNotify($email));
         return true;
     }
 
@@ -39,7 +37,7 @@ class ForgotService
 
 
 
-    
+
     public function resetPassword($data)
     {
         return $this->forgotRepository->resetPassword($data);

@@ -23,16 +23,11 @@ class ForgotController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        if ($request->filled('phone') && preg_match('/^\+200/', $request->input('phone'))) {
-            $normalized = preg_replace('/^\+200/', '+20', $request->input('phone'), 1);
-            $request->merge(['phone' => $normalized]);
-        }
-
         $data = $request->validate([
-            'phone' => 'required|exists:users,phone',
+            'email' => 'required|exists:users,email',
         ]);
 
-        if (! $this->forgotService->sendOTP($data['phone'])) {
+        if (! $this->forgotService->sendOTP($data['email'])) {
             return ApiResponse::sendResponse(
                 404,
                 __('front.something-filed'),
@@ -53,7 +48,7 @@ class ForgotController extends Controller
     public function verifyOtp(Request $request)
     {
         $data = $request->validate([
-            'phone' => 'required|exists:users,phone',
+            'email' => 'required|exists:users,email',
             'token' => 'required|string',
         ]);
 
@@ -62,8 +57,8 @@ class ForgotController extends Controller
             return ApiResponse::sendResponse(422, __('front.invalid-otp'));
         }
 
-        // Save verified status for phone for 5 minutes
-        Cache::put('verified_otp_' . $data['phone'], true, now()->addMinutes(5));
+        // Save verified status for email for 5 minutes
+        Cache::put('verified_otp_' . $data['email'], true, now()->addMinutes(5));
 
         return ApiResponse::sendResponse(200, __('front.otp-verified'));
     }
@@ -74,30 +69,30 @@ class ForgotController extends Controller
     public function resetPassword(Request $request)
     {
         $data = $request->validate([
-            'phone'    => 'required|exists:users,phone',
+            'email'    => 'required|exists:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if (!Cache::get('verified_otp_' . $data['phone'])) {
+        if (!Cache::get('verified_otp_' . $data['email'])) {
             return ApiResponse::sendResponse(403, __('front.otp-not-verified'), []);
         }
 
         $user = $this->forgotService->resetPassword($data);
-        Cache::forget('verified_otp_' . $data['phone']);
+        Cache::forget('verified_otp_' . $data['email']);
 
         return ApiResponse::sendResponse(200, __('front.password-reset-successful'), UserResource::make($user));
     }
 
 
 
-    
+
     public function resendOtp(Request $request)
     {
         $data = $request->validate([
-            'phone' => 'required|exists:users,phone',
+            'email' => 'required|exists:users,email',
         ]);
 
-        $this->forgotService->sendOTP($data['phone']);
+        $this->forgotService->sendOTP($data['email']);
         return ApiResponse::sendResponse(200, __('front.otp-resent-successfully'), []);
     }
 }
