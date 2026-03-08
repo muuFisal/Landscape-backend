@@ -39,7 +39,7 @@ class AuthRepository
 
     public function verifyOtp($data)
     {
-        $user = User::where('phone', $data['phone'])->first();
+        $user = User::where('email', $data['email'])->first();
 
         if (!$user) {
             return [
@@ -53,7 +53,7 @@ class AuthRepository
             $user->update(['fcm_token' => $data['fcm_token']]);
         }
 
-        $otp = $this->otp->validate($data['phone'], $data['token']);
+        $otp = $this->otp->validate($data['email'], $data['token']);
         if (!$otp->status) {
             return [
                 'status' => 422,
@@ -91,7 +91,7 @@ class AuthRepository
             ];
         }
 
-        $user = User::where('phone', $credentials['phone'])->first();
+        $user = User::where('email', $credentials['email'])->first();
 
         if (!$user) {
             return [
@@ -106,14 +106,14 @@ class AuthRepository
             return [
                 'status' => 415,
                 'message' => __('front.verify-account-first'),
-                'data' => ['phone' => $user->phone]
+                'data' => ['email' => $user->email]
             ];
         }
         if ($user->status == 0) {
             return [
                 'status' => 422,
                 'message' => __('front.account-not-activated'),
-                'data' => ['phone' => $user->phone]
+                'data' => ['email' => $user->email]
             ];
         }
 
@@ -144,7 +144,7 @@ class AuthRepository
 
     public function resendOtp($data)
     {
-        $user = User::where('phone', $data['phone'])->first();
+        $user = User::where('email', $data['email'])->first();
         if (!$user) {
             return [
                 'status' => 422,
@@ -160,7 +160,7 @@ class AuthRepository
             'status' => 200,
             'message' => __('front.otp-resent-successfully'),
             'data' => [
-                'phone' => $user->phone
+                'email' => $user->email
             ]
         ];
     } // End resendOtp Method
