@@ -13,15 +13,37 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            
             $table->string('image')->nullable();
+
             $table->string('name');
+
             $table->string('password');
+
+            $table->enum('gender', ['male', 'female'])->default('male');
+
+            $table->foreignId('country_id')
+                ->nullable()
+                ->constrained('countries')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->foreignId('governorate_id')
+                ->nullable()
+                ->constrained('governorates')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
             $table->string('phone')->unique()->nullable();
             $table->boolean('status')->default(1);
             $table->string('email')->unique()->nullable();
             $table->date('birth_date')->nullable();
-            $table->text('fcm_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            // Push notifications
+            $table->text('fcm_token')->nullable();
+            $table->string('firebase_uid')->nullable()->unique();
+            $table->string('auth_provider')->nullable(); // e.g. password, google.com, facebook.com
+
             $table->rememberToken();
             $table->timestamps();
         });

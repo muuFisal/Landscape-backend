@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgotController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\SettingsController;
+use Illuminate\Support\Facades\Route;
 
 
 ## ================== SETTINGS ================== ##
@@ -16,6 +17,10 @@ Route::post('/contact',     [SettingsController::class, 'contact']);
 Route::get('/banners',      [SettingsController::class, 'banners']);
 ## ================== SETTINGS ================== ##
 
+## ================== LOOKUPS (Mobile) ================== ##
+Route::get('/countries',                            [LocationController::class, 'countries']);
+Route::get('/countries/{country_id}/governorates',  [LocationController::class, 'governorates']);
+## ================== LOOKUPS (Mobile) ==================
 
 
 
@@ -26,6 +31,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/resend-otp',   'resendOtp')->middleware('guest');
     Route::post('/login',        'login')->middleware('guest');
     Route::post('/logout',       'logout')->middleware('auth:sanctum');
+    Route::post('/firebase-login',       [AuthController::class, 'firebaseLogin']);
 });
 ## ------------------ AUTH ROUTES ------------------ ##
 

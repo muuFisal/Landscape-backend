@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\FirebaseLoginRequest;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\Api\Auth\AuthService;
+use App\Services\Api\Auth\FirebaseAuthService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -50,8 +52,8 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credenshais =$request->only('phone', 'password' , 'fcm_token');
-        $response = $this->authService->login($credenshais , 'web');
+        $credenshais = $request->only('phone', 'password', 'fcm_token');
+        $response = $this->authService->login($credenshais, 'web');
         return ApiResponse::sendResponse($response['status'], $response['message'], $response['data']);
     }
 
@@ -77,4 +79,12 @@ class AuthController extends Controller
     }
 
 
+    public function firebaseLogin(FirebaseLoginRequest $request, FirebaseAuthService $service)
+    {
+        return $service->loginWithFirebase(
+            $request->input('id_token'),
+            $request->input('device_name'),
+            $request->input('fcm_token')
+        );
+    }
 }
