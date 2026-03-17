@@ -302,4 +302,16 @@ return [
 
 
 
+
+    'light-logo' => 'Light Logo',
+    'dark-logo' => 'Dark Logo',
+    'badge-ar' => 'Badge In Arabic',
+    'badge-en' => 'Badge In English',
+    'about-section' => 'About Section',
+    'mission-section' => 'Mission Section',
+    'vision-section' => 'Vision Section',
+    'shapes-section' => 'What Shapes The Work Section',
+    'what-shapes-cards' => 'What Shapes The Work Cards',
+    'add-card' => 'Add Card',
+
 ];

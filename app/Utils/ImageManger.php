@@ -2,7 +2,6 @@
 
 namespace App\Utils;
 
-use Illuminate\Support\Str;
 
 
 class ImageManger
@@ -11,7 +10,7 @@ class ImageManger
     public function uploadImage($path, $image, $disk = 'public')
     {
         $file_name = $this->generateImageName($image);
-        Self::storeImageInLocale($image, $path, $file_name, $disk);
+        $this->storeImageInLocale($image, $path, $file_name, $disk);
         return $path . '/' . $file_name;
     }
 

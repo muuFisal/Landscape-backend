@@ -3,194 +3,208 @@
 namespace Database\Seeders;
 
 use App\Models\About;
-use App\Models\Terms;
+use App\Models\Faq;
 use App\Models\Privacy;
 use App\Models\Setting;
-use App\Models\Faq;
+use App\Models\Terms;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        $defaultLogo = 'uploads/images/logo.png';
         $defaultImage = 'uploads/images/logo.png';
 
-        $data = [
-            // Translatable
+        $settingData = [
             'site_name' => [
-                'en' => 'FIX Store',
-                'ar' => 'FIX Store',
+                'en' => 'MDO',
+                'ar' => 'MDO',
             ],
             'site_title' => [
-                'en' => 'FIX Store — Mobiles & Spare Parts',
-                'ar' => 'FIX Store — موبايلات وقطع غيار',
+                'en' => 'MDO Landscape Studio',
+                'ar' => 'استوديو MDO لتصميم اللاندسكيب',
             ],
             'site_desc' => [
-                'en' => 'Shop mobiles, accessories, and original spare parts with fast delivery and secure checkout.',
-                'ar' => 'تسوّق الموبايلات والإكسسوارات وقطع الغيار الأصلية مع توصيل سريع ودفع آمن.',
+                'en' => 'A boutique landscape studio shaped around modern restraint and premium execution.',
+                'ar' => 'استوديو لاندسكيب بوتيك مبني على البساطة الحديثة والتنفيذ الراقي.',
             ],
             'site_address' => [
                 'en' => 'Cairo, Egypt',
                 'ar' => 'القاهرة، مصر',
             ],
             'meta_key' => [
-                'en' => 'mobiles, smartphones, spare parts, phone parts, accessories, screens, batteries, chargers',
-                'ar' => 'موبايلات, هواتف, قطع غيار, اكسسوارات, شاشات, بطاريات, شواحن',
+                'en' => 'landscape, pool design, outdoor living, luxury landscape, villa garden, MDO',
+                'ar' => 'لاندسكيب، مسابح، تصميم خارجي، حدائق فلل، استوديو لاندسكيب، MDO',
             ],
             'meta_desc' => [
-                'en' => 'FIX Store offers mobiles, accessories, and trusted spare parts with clear pricing and support.',
-                'ar' => 'FIX Store يوفر موبايلات وإكسسوارات وقطع غيار موثوقة بأسعار واضحة ودعم سريع.',
+                'en' => 'MDO delivers refined landscape design, premium pools, and outdoor environments with a calm modern language.',
+                'ar' => 'تقدّم MDO تصميمات لاندسكيب راقية ومساحات خارجية ومسابح بلغة بصرية هادئة وعصرية.',
             ],
-
-            // Non-translatable
-            'site_phone'    => '+201000000000',
-            'site_email'    => 'info@fix-store.com',
-            'email_support' => 'support@fix-store.com',
-
-            // Social
-            'facebook'  => 'https://facebook.com/fixstore',
-            'x_url'     => 'https://x.com/fixstore',
-            'youtube'   => 'https://youtube.com/@fixstore',
-            'instagram' => 'https://instagram.com/fixstore',
-            'tiktok'    => 'https://tiktok.com/@fixstore',
-            'linkedin'  => 'https://linkedin.com/company/fixstore',
-            'whatsapp'  => '+201000000000',
-
-            // Media (use default image everywhere for now)
-            'logo'    => $defaultImage,
-            'favicon' => $defaultImage,
-
-            // Others
-            'site_copyright' => '© ' . now()->year . ' FIX Store. All rights reserved.',
-            'promotion_url'  => 'https://fix-store.com/offers',
+            'site_phone' => '+201000000000',
+            'site_email' => 'info@mdo-landscape.com',
+            'email_support' => 'support@mdo-landscape.com',
+            'facebook' => 'https://facebook.com/mdolandscape',
+            'x_url' => 'https://x.com/mdolandscape',
+            'youtube' => 'https://youtube.com/@mdolandscape',
+            'instagram' => 'https://instagram.com/mdolandscape',
+            'tiktok' => 'https://tiktok.com/@mdolandscape',
+            'linkedin' => 'https://linkedin.com/company/mdolandscape',
+            'whatsapp' => '+201000000000',
+            'logo' => $defaultLogo,
+            'light_logo' => $defaultLogo,
+            'dark_logo' => $defaultLogo,
+            'favicon' => $defaultLogo,
+            'site_copyright' => '© ' . now()->year . ' MDO Landscape Studio. All rights reserved.',
+            'promotion_url' => 'https://mdo-landscape.com/contact',
         ];
 
-        // Update first row if exists, else create
-        $existing = Setting::query()->first();
-        if ($existing) {
-            $existing->update($data);
-        } else {
-            Setting::query()->create($data);
-        }
+        Setting::query()->updateOrCreate(['id' => 1], $settingData);
 
-        // About (idempotent)
         About::query()->updateOrCreate(
             ['id' => 1],
             [
                 'title' => [
-                    'en' => 'About FIX Store',
-                    'ar' => 'عن FIX Store',
+                    'en' => 'A landscape studio shaped around modern restraint and premium execution',
+                    'ar' => 'استوديو لاندسكيب يتشكّل حول البساطة الحديثة والتنفيذ الراقي',
                 ],
                 'desc' => [
-                    'en' => 'FIX Store is your destination for mobiles, accessories, and reliable spare parts. We focus on quality, fair pricing, and fast delivery for consumers and merchants.',
-                    'ar' => 'FIX Store هو وجهتك للموبايلات والإكسسوارات وقطع الغيار الموثوقة. نركز على الجودة والسعر المناسب والتوصيل السريع للمستهلك والتاجر.',
+                    'en' => '<p>This React version keeps the visual calm, monochrome elegance, and premium storytelling expected from a luxury landscape and pool studio.</p><p>Our studio approach is rooted in visual simplicity, smart planning, and outdoor experiences that feel natural to live in.</p>',
+                    'ar' => '<p>تعكس هذه النسخة لغة بصرية هادئة وأناقة أحادية راقية وسردًا بصريًا يليق باستوديو لاندسكيب ومسابح فاخر.</p><p>يعتمد أسلوبنا على البساطة المدروسة والتخطيط الذكي وصناعة تجربة خارجية مريحة وطبيعية للعيش.</p>',
                 ],
-                'banner' => $defaultImage,
-                'image'  => $defaultImage,
+                'image' => $defaultImage,
+                'about_badge' => [
+                    'en' => 'About the studio',
+                    'ar' => 'عن الاستوديو',
+                ],
+                'about_title' => [
+                    'en' => 'A landscape studio shaped around modern restraint and premium execution',
+                    'ar' => 'استوديو لاندسكيب يتشكّل حول البساطة الحديثة والتنفيذ الراقي',
+                ],
+                'about_description' => [
+                    'en' => '<p>This React version keeps the visual calm, monochrome elegance, and premium storytelling expected from a luxury landscape and pool studio.</p><p>Our studio approach is rooted in visual simplicity, smart planning, and outdoor experiences that feel natural to live in. Whether a client needs a complete build or a considered renovation, we focus on atmosphere, clarity, and long-term value.</p>',
+                    'ar' => '<p>تحافظ هذه النسخة على الهدوء البصري والأناقة الأحادية والسرد الراقي المتوقع من استوديو فاخر لتصميم اللاندسكيب والمسابح.</p><p>يرتكز أسلوبنا على البساطة البصرية والتخطيط الذكي وصناعة مساحات خارجية تشعر بأنها طبيعية للعيش. سواء احتاج العميل إلى تنفيذ كامل أو تطوير مدروس، فنحن نركّز على الأجواء والوضوح والقيمة طويلة المدى.</p>',
+                ],
+                'about_image' => $defaultImage,
+                'mission_badge' => [
+                    'en' => 'Our mission',
+                    'ar' => 'رسالتنا',
+                ],
+                'mission_title' => [
+                    'en' => 'Elevating the standards of outdoor living',
+                    'ar' => 'نرفع معايير الحياة الخارجية',
+                ],
+                'mission_description' => [
+                    'en' => '<p>To provide a seamless design-and-build experience that transforms outdoor environments into high-value architectural statements.</p>',
+                    'ar' => '<p>نقدّم تجربة متكاملة للتصميم والتنفيذ تحوّل المساحات الخارجية إلى قيمة معمارية واضحة ومؤثرة.</p>',
+                ],
+                'mission_image' => $defaultImage,
+                'vision_badge' => [
+                    'en' => 'Our vision',
+                    'ar' => 'رؤيتنا',
+                ],
+                'vision_title' => [
+                    'en' => 'Defining the future of luxury landscape',
+                    'ar' => 'نرسم مستقبل اللاندسكيب الفاخر',
+                ],
+                'vision_description' => [
+                    'en' => '<p>To be the most trusted boutique studio for clients seeking modern restraint, technical precision, and an enduring outdoor lifestyle.</p>',
+                    'ar' => '<p>أن نكون الاستوديو البوتيكي الأكثر ثقة للعملاء الباحثين عن البساطة الحديثة والدقة الفنية وتجربة خارجية تدوم.</p>',
+                ],
+                'vision_image' => $defaultImage,
+                'shapes_badge' => [
+                    'en' => 'What shapes the work',
+                    'ar' => 'ما الذي يصنع العمل',
+                ],
+                'shapes_title' => [
+                    'en' => 'Design values that guide every decision',
+                    'ar' => 'قيم تصميمية تقود كل قرار',
+                ],
+                'shapes_description' => [
+                    'en' => '<p>We care about elegance, clarity, and a result that still feels good months and years after handover.</p>',
+                    'ar' => '<p>نهتم بالأناقة والوضوح والنتيجة التي تظل مريحة ومقنعة بعد التسليم بمدة طويلة.</p>',
+                ],
+                'shapes_items' => [
+                    [
+                        'title' => [
+                            'en' => 'Elegant clarity',
+                            'ar' => 'وضوح أنيق',
+                        ],
+                        'description' => [
+                            'en' => 'Layouts, materials, and planting are selected to create calm confidence rather than visual noise.',
+                            'ar' => 'نختار التوزيع والخامات والزراعة لصناعة هدوء ووضوح بدلاً من الضجيج البصري.',
+                        ],
+                    ],
+                    [
+                        'title' => [
+                            'en' => 'Buildable intelligence',
+                            'ar' => 'ذكاء قابل للتنفيذ',
+                        ],
+                        'description' => [
+                            'en' => 'Ideas are developed with execution in mind, so the finished result stays true to the concept.',
+                            'ar' => 'نطوّر الأفكار بعين التنفيذ حتى يظل الناتج النهائي وفيًا للفكرة الأصلية.',
+                        ],
+                    ],
+                    [
+                        'title' => [
+                            'en' => 'Lasting value',
+                            'ar' => 'قيمة تدوم',
+                        ],
+                        'description' => [
+                            'en' => 'We design for real life, with practical movement, durable choices, and spaces that age gracefully.',
+                            'ar' => 'نصمم للحياة الحقيقية بحركة عملية وخيارات متينة ومساحات تزداد جمالاً مع الوقت.',
+                        ],
+                    ],
+                ],
             ]
         );
 
-        // Privacy (idempotent)
         Privacy::query()->updateOrCreate(
             ['id' => 1],
             [
-                'title' => [
-                    'en' => 'Privacy Policy',
-                    'ar' => 'سياسة الخصوصية',
-                ],
+                'title' => ['en' => 'Privacy Policy', 'ar' => 'سياسة الخصوصية'],
                 'desc' => [
-                    'en' => 'We respect your privacy. Your data is used to process orders, provide support, and improve your shopping experience. We do not sell your personal information.',
-                    'ar' => 'نحترم خصوصيتك. تُستخدم بياناتك لمعالجة الطلبات وتقديم الدعم وتحسين تجربة التسوق. لا نقوم ببيع بياناتك الشخصية.',
+                    'en' => 'We respect your privacy and only use submitted information to respond to inquiries, manage project communication, and improve the studio experience.',
+                    'ar' => 'نحترم خصوصيتك ونستخدم البيانات المُرسلة فقط للرد على الاستفسارات وإدارة التواصل وتحسين تجربة التعامل مع الاستوديو.',
                 ],
                 'banner' => $defaultImage,
-                'image'  => $defaultImage,
+                'image' => $defaultImage,
             ]
         );
 
-        // Terms (idempotent)
         Terms::query()->updateOrCreate(
             ['id' => 1],
             [
-                'title' => [
-                    'en' => 'Terms & Conditions',
-                    'ar' => 'الشروط والأحكام',
-                ],
+                'title' => ['en' => 'Terms & Conditions', 'ar' => 'الشروط والأحكام'],
                 'desc' => [
-                    'en' => 'By using FIX Store, you agree to our terms regarding orders, payments, returns, and warranty policies. Please read them carefully before purchasing.',
-                    'ar' => 'باستخدام FIX Store، أنت توافق على الشروط الخاصة بالطلبات والدفع والاسترجاع وسياسات الضمان. يُرجى قراءتها جيدًا قبل الشراء.',
+                    'en' => 'By using the MDO website you agree to our terms regarding contact forms, project consultation, intellectual property, and content usage.',
+                    'ar' => 'باستخدامك لموقع MDO فإنك توافق على الشروط المتعلقة بطلبات التواصل والاستشارات وحقوق الملكية الفكرية واستخدام المحتوى.',
                 ],
                 'banner' => $defaultImage,
-                'image'  => $defaultImage,
+                'image' => $defaultImage,
             ]
         );
 
-        // FAQs (idempotent by English question to avoid duplicates)
         $faqs = [
             [
-                'question' => [
-                    'en' => 'How can I order from FIX Store?',
-                    'ar' => 'إزاي أطلب من FIX Store؟',
-                ],
-                'answer' => [
-                    'en' => 'Browse products, add items to your cart, then proceed to checkout and confirm your order.',
-                    'ar' => 'اختار المنتجات، ضيفها للسلة، وبعد كده كمل خطوة الدفع وأكد الطلب.',
-                ],
+                'question' => ['en' => 'Do you handle both design and execution?', 'ar' => 'هل تتولون التصميم والتنفيذ معًا؟'],
+                'answer' => ['en' => 'Yes. We can support the full journey from concept design to execution supervision based on project scope.', 'ar' => 'نعم، يمكننا دعم المشروع من مرحلة الفكرة وحتى الإشراف على التنفيذ بحسب نطاق العمل.'],
                 'status' => 1,
             ],
             [
-                'question' => [
-                    'en' => 'Do you sell original spare parts?',
-                    'ar' => 'هل بتبيعوا قطع غيار أصلية؟',
-                ],
-                'answer' => [
-                    'en' => 'We offer reliable spare parts with clear specifications. Product pages show condition, compatibility, and warranty details when available.',
-                    'ar' => 'بنوفّر قطع غيار موثوقة بمواصفات واضحة. صفحة المنتج بتوضح الحالة والتوافق والضمان إن وُجد.',
-                ],
+                'question' => ['en' => 'Can I request a consultation online?', 'ar' => 'هل يمكنني طلب استشارة أونلاين؟'],
+                'answer' => ['en' => 'Absolutely. Use the contact form or WhatsApp button and our team will get back to you.', 'ar' => 'بالتأكيد. استخدم نموذج التواصل أو زر واتساب وسيتواصل معك فريقنا.'],
                 'status' => 1,
             ],
             [
-                'question' => [
-                    'en' => 'How long does delivery take?',
-                    'ar' => 'التوصيل بياخد قد إيه؟',
-                ],
-                'answer' => [
-                    'en' => 'Delivery time depends on your location. Most orders arrive within 1–3 business days.',
-                    'ar' => 'مدة التوصيل بتختلف حسب المكان. أغلب الطلبات بتوصل خلال 1–3 أيام عمل.',
-                ],
-                'status' => 1,
-            ],
-            [
-                'question' => [
-                    'en' => 'Can merchants buy in bulk?',
-                    'ar' => 'هل التاجر يقدر يشتري جملة؟',
-                ],
-                'answer' => [
-                    'en' => 'Yes. Register as a merchant to access business details and support for bulk purchasing.',
-                    'ar' => 'أيوه. سجّل كتاجر علشان تضيف بيانات النشاط وتحصل على دعم للشراء بالجملة.',
-                ],
-                'status' => 1,
-            ],
-            [
-                'question' => [
-                    'en' => 'What is your return policy?',
-                    'ar' => 'إيه سياسة الاسترجاع؟',
-                ],
-                'answer' => [
-                    'en' => 'Returns are accepted according to item condition and category. Please contact support with your order number.',
-                    'ar' => 'الاسترجاع متاح حسب حالة المنتج ونوعه. تواصل مع الدعم برقم الطلب.',
-                ],
+                'question' => ['en' => 'Do you work on villas, compounds, and hospitality projects?', 'ar' => 'هل تعملون على الفلل والكمبوندات والمشاريع الفندقية؟'],
+                'answer' => ['en' => 'Yes. Our studio can adapt to private residential, shared community, and hospitality outdoor environments.', 'ar' => 'نعم، يعمل الاستوديو على المشاريع السكنية الخاصة والمشاريع المشتركة ومساحات الضيافة الخارجية.'],
                 'status' => 1,
             ],
         ];
 
         foreach ($faqs as $faq) {
-            Faq::query()->updateOrCreate(
-                ['question->en' => $faq['question']['en']],
-                $faq
-            );
+            Faq::query()->updateOrCreate(['question->en' => $faq['question']['en']], $faq);
         }
     }
 }

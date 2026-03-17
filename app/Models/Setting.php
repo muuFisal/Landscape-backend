@@ -11,9 +11,6 @@ class Setting extends Model
 
     protected $table = 'settings';
 
-    /**
-     * الحقول المترجمة (تتخزن كـ JSON في نفس الأعمدة)
-     */
     public $translatable = [
         'site_name',
         'site_desc',
@@ -23,9 +20,6 @@ class Setting extends Model
         'meta_desc',
     ];
 
-    /**
-     * الحقول القابلة للملء
-     */
     protected $fillable = [
         'site_name',
         'site_desc',
@@ -34,7 +28,6 @@ class Setting extends Model
         'site_address',
         'site_email',
         'email_support',
-
         'facebook',
         'x_url',
         'youtube',
@@ -42,13 +35,12 @@ class Setting extends Model
         'tiktok',
         'linkedin',
         'whatsapp',
-
         'meta_key',
         'meta_desc',
-
         'logo',
+        'light_logo',
+        'dark_logo',
         'favicon',
-
         'site_copyright',
         'promotion_url',
     ];

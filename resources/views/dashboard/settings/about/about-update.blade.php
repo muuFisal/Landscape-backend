@@ -1,58 +1,110 @@
 <div>
     <form class="form form-horizontal" wire:submit.prevent='submit'>
-        <div class="row">
-            <div class="mb-1 col-md-6">
-                <label class="form-label">{{ __('dashboard.name-ar') }}</label>
-                <input type="text" class="form-control" wire:model="title_ar"
-                    placeholder="{{ __('dashboard.name-ar') }}">
-                @include('dashboard.includes.error', ['property' => 'title_ar'])
-            </div>
-            <div class="mb-1 col-md-6">
-                <label class="form-label">{{ __('dashboard.name-en') }}</label>
-                <input type="text" class="form-control" wire:model="title"
-                    placeholder="{{ __('dashboard.name-en') }}">
-                @include('dashboard.includes.error', ['property' => 'title'])
-            </div>
-        </div>
+        @php
+            $sections = [
+                'about' => ['image' => 'about_image'],
+                'mission' => ['image' => 'mission_image'],
+                'vision' => ['image' => 'vision_image'],
+                'shapes' => ['image' => null],
+            ];
+        @endphp
 
-        <div class="mb-1" wire:ignore>
-            <label class="form-label">{{ __('dashboard.description-ar') }}</label>
-            <div id="summernote_ar">{!! $desc_ar !!}</div>
-            @include('dashboard.includes.error', ['property' => 'desc_ar'])
-        </div>
-
-        <div class="mb-1" wire:ignore>
-            <label class="form-label">{{ __('dashboard.description-en') }}</label>
-            <div id="summernote_en">{!! $desc !!}</div>
-            @include('dashboard.includes.error', ['property' => 'desc'])
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-6">
-                <label class="form-label">{{ __('dashboard.banner') }}</label>
-                <div class="form-group mb-2">
-                    @if (isset($banner) && is_object($banner))
-                        <img src="{{ $banner->temporaryUrl() }}" width="150">
-                    @else
-                        <img src="{{ asset($banner) }}" width="150">
-                    @endif
+        @foreach ($sections as $section => $meta)
+            <div class="border rounded p-2 mb-3">
+                <h5 class="mb-2 text-primary text-capitalize">{{ __('dashboard.' . $section . '-section') }}</h5>
+                <div class="row">
+                    <div class="mb-1 col-md-6">
+                        <label class="form-label">{{ __('dashboard.badge-ar') }}</label>
+                        <input type="text" class="form-control" wire:model.defer="{{ $section }}_badge_ar">
+                        @include('dashboard.includes.error', ['property' => $section . '_badge_ar'])
+                    </div>
+                    <div class="mb-1 col-md-6">
+                        <label class="form-label">{{ __('dashboard.badge-en') }}</label>
+                        <input type="text" class="form-control" wire:model.defer="{{ $section }}_badge_en">
+                        @include('dashboard.includes.error', ['property' => $section . '_badge_en'])
+                    </div>
                 </div>
-                <input type="file" class="form-control" wire:model="banner">
-                @include('dashboard.includes.error', ['property' => 'banner'])
+
+                <div class="row">
+                    <div class="mb-1 col-md-6">
+                        <label class="form-label">{{ __('dashboard.name-ar') }}</label>
+                        <input type="text" class="form-control" wire:model.defer="{{ $section }}_title_ar">
+                        @include('dashboard.includes.error', ['property' => $section . '_title_ar'])
+                    </div>
+                    <div class="mb-1 col-md-6">
+                        <label class="form-label">{{ __('dashboard.name-en') }}</label>
+                        <input type="text" class="form-control" wire:model.defer="{{ $section }}_title_en">
+                        @include('dashboard.includes.error', ['property' => $section . '_title_en'])
+                    </div>
+                </div>
+
+                <div class="mb-1" wire:ignore>
+                    <label class="form-label">{{ __('dashboard.description-ar') }}</label>
+                    <div id="{{ $section }}_description_ar_editor">{!! data_get($this, $section.'_description_ar') !!}</div>
+                    @include('dashboard.includes.error', ['property' => $section . '_description_ar'])
+                </div>
+
+                <div class="mb-1" wire:ignore>
+                    <label class="form-label">{{ __('dashboard.description-en') }}</label>
+                    <div id="{{ $section }}_description_en_editor">{!! data_get($this, $section.'_description_en') !!}</div>
+                    @include('dashboard.includes.error', ['property' => $section . '_description_en'])
+                </div>
+
+                @if ($meta['image'])
+                    <div class="mb-1">
+                        <label class="form-label">{{ __('dashboard.image') }}</label>
+                        <div class="mb-2 p-1 border rounded bg-light-subtle">
+                            @if (isset(${$meta['image']}) && is_object(${$meta['image']}))
+                                <img src="{{ ${$meta['image']}->temporaryUrl() }}" width="180" class="img-fluid">
+                            @elseif(!empty(${$meta['image']}))
+                                <img src="{{ asset(${$meta['image']}) }}" width="180" class="img-fluid">
+                            @endif
+                        </div>
+                        <input type="file" class="form-control" wire:model="{{ $meta['image'] }}">
+                        @include('dashboard.includes.error', ['property' => $meta['image']])
+                    </div>
+                @endif
+            </div>
+        @endforeach
+
+        <div class="border rounded p-2 mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0 text-primary">{{ __('dashboard.what-shapes-cards') }}</h5>
+                <button type="button" class="btn btn-sm btn-outline-primary" wire:click="addShapeCard">{{ __('dashboard.add-card') }}</button>
             </div>
 
-            <div class="col-6">
-                <label class="form-label">{{ __('dashboard.image') }}</label>
-                <div class="form-group mb-2">
-                    @if (isset($image) && is_object($image))
-                        <img src="{{ $image->temporaryUrl() }}" width="150">
-                    @else
-                        <img src="{{ asset($image) }}" width="150">
-                    @endif
+            @foreach ($shape_cards as $index => $card)
+                <div class="border rounded p-2 mb-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <strong>#{{ $index + 1 }}</strong>
+                        <button type="button" class="btn btn-sm btn-outline-danger" wire:click="removeShapeCard({{ $index }})">{{ __('dashboard.delete') }}</button>
+                    </div>
+                    <div class="row">
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label">{{ __('dashboard.name-ar') }}</label>
+                            <input type="text" class="form-control" wire:model.defer="shape_cards.{{ $index }}.title.ar">
+                            @include('dashboard.includes.error', ['property' => 'shape_cards.' . $index . '.title.ar'])
+                        </div>
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label">{{ __('dashboard.name-en') }}</label>
+                            <input type="text" class="form-control" wire:model.defer="shape_cards.{{ $index }}.title.en">
+                            @include('dashboard.includes.error', ['property' => 'shape_cards.' . $index . '.title.en'])
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label">{{ __('dashboard.description-ar') }}</label>
+                            <textarea class="form-control" rows="3" wire:model.defer="shape_cards.{{ $index }}.description.ar"></textarea>
+                            @include('dashboard.includes.error', ['property' => 'shape_cards.' . $index . '.description.ar'])
+                        </div>
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label">{{ __('dashboard.description-en') }}</label>
+                            <textarea class="form-control" rows="3" wire:model.defer="shape_cards.{{ $index }}.description.en"></textarea>
+                            @include('dashboard.includes.error', ['property' => 'shape_cards.' . $index . '.description.en'])
+                        </div>
+                    </div>
                 </div>
-                <input type="file" class="form-control" wire:model="image">
-                @include('dashboard.includes.error', ['property' => 'image'])
-            </div>
+            @endforeach
         </div>
 
         <button type="submit" class="btn btn-primary">{{ __('dashboard.submit') }}</button>
@@ -69,19 +121,14 @@
     <script>
         function initSummernote(id, lang, callback) {
             $('#' + id).summernote({
-                height: 300,
+                height: 220,
                 lang: lang,
                 toolbar: [
                     ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
                     ['insert', ['link', 'hr']],
-                    ['view', ['fullscreen', 'help']],
-                    ['misc', ['undo', 'redo']]
+                    ['view', ['fullscreen', 'codeview']]
                 ],
                 callbacks: {
                     onChange: callback
@@ -90,17 +137,23 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            initSummernote('summernote_ar', 'ar-AR', function(contents) {
-                @this.set('desc_ar', contents);
+            const sections = ['about', 'mission', 'vision', 'shapes'];
+
+            sections.forEach(section => {
+                initSummernote(`${section}_description_ar_editor`, 'ar-AR', function(contents) {
+                    @this.set(`${section}_description_ar`, contents);
+                });
+
+                initSummernote(`${section}_description_en_editor`, 'en-US', function(contents) {
+                    @this.set(`${section}_description_en`, contents);
+                });
             });
 
-            initSummernote('summernote_en', 'en-US', function(contents) {
-                @this.set('desc', contents);
-            });
-
-            Livewire.on('refresh', () => {
-                $('#summernote_ar').summernote('code', @this.get('desc_ar'));
-                $('#summernote_en').summernote('code', @this.get('desc'));
+            Livewire.on('aboutUpdateMS', () => {
+                sections.forEach(section => {
+                    $(`#${section}_description_ar_editor`).summernote('code', @this.get(`${section}_description_ar`));
+                    $(`#${section}_description_en_editor`).summernote('code', @this.get(`${section}_description_en`));
+                });
             });
         });
     </script>

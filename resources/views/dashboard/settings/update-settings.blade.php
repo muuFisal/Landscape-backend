@@ -1,7 +1,6 @@
 <div>
     <form class="form form-horizontal" wire:submit.prevent='submit'>
-        {{-- ========== BASIC (Translatable) ========== --}}
-        <h2 class="text-center mt-2" style="color: blue">{{ __('dashboard.basic-info') }}</h2>
+        <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.general') }}</h2>
         <hr style="color: blue" class="mb-2">
 
         <div class="row">
@@ -54,7 +53,6 @@
             </div>
         </div>
 
-        {{-- ========== CONTACTS ========== --}}
         <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.contacts') }}</h2>
         <hr style="color: blue" class="mb-2">
 
@@ -84,7 +82,6 @@
             </div>
         </div>
 
-        {{-- ========== SOCIAL ========== --}}
         <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.social-media') }}</h2>
         <hr style="color: blue" class="mb-2">
 
@@ -127,51 +124,42 @@
             </div>
         </div>
 
-        {{-- ========== MEDIA ========== --}}
         <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.media') }}</h2>
         <hr style="color: blue" class="mb-2">
 
         <div class="row mb-2">
-            <div class="col-md-6">
-                <label class="col-form-label">{{ __('dashboard.logo') }}</label>
-                <div class="form-group mb-1">
-                    @if (isset($logo) && is_object($logo))
-                        <img src="{{ $logo->temporaryUrl() }}" width="150" class="wd-80 ">
-                    @else
-                        <img src="{{ asset($logo) }}" width="150" class="wd-80 ">
-                    @endif
+            @foreach ([
+                'logo' => __('dashboard.logo'),
+                'light_logo' => __('dashboard.light-logo'),
+                'dark_logo' => __('dashboard.dark-logo'),
+                'favicon' => __('dashboard.site-favicon'),
+            ] as $field => $label)
+                <div class="col-md-6 mb-2">
+                    <label class="col-form-label">{{ $label }}</label>
+                    <div class="form-group mb-1 p-1 border rounded bg-light-subtle">
+                        @if (isset($$field) && is_object($$field))
+                            <img src="{{ $$field->temporaryUrl() }}" width="180" class="img-fluid">
+                        @elseif(!empty($$field))
+                            <img src="{{ asset($$field) }}" width="180" class="img-fluid">
+                        @endif
+                    </div>
+                    <input type="file" class="form-control" wire:model="{{ $field }}">
+                    @include('dashboard.includes.error', ['property' => $field])
                 </div>
-                <input type="file" class="form-control" wire:model="logo">
-                @include('dashboard.includes.error', ['property' => 'logo'])
-            </div>
-
-            <div class="col-md-6">
-                <label class="col-form-label">{{ __('dashboard.site-favicon') }}</label>
-                <div class="form-group mb-1">
-                    @if (isset($favicon) && is_object($favicon))
-                        <img src="{{ $favicon->temporaryUrl() }}" width="150" class="wd-80 ">
-                    @else
-                        <img src="{{ asset($favicon) }}" width="150" class="wd-80 ">
-                    @endif
-                </div>
-                <input type="file" class="form-control" wire:model="favicon">
-                @include('dashboard.includes.error', ['property' => 'favicon'])
-            </div>
+            @endforeach
         </div>
 
-        {{-- ========== SEO (Translatable) ========== --}}
         <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.seo') }}</h2>
         <hr style="color: blue" class="mb-2">
 
         <div class="mb-2">
             <label class="d-block form-label">{{ __('dashboard.meta-key-ar') }}</label>
-            <textarea class="form-control" rows="2" wire:model.defer="meta_key_ar"
-                placeholder="مثال: برمجة, مواقع, تطبيقات"></textarea>
+            <textarea class="form-control" rows="2" wire:model.defer="meta_key_ar"></textarea>
             @include('dashboard.includes.error', ['property' => 'meta_key_ar'])
         </div>
         <div class="mb-2">
             <label class="d-block form-label">{{ __('dashboard.meta-key-en') }}</label>
-            <textarea class="form-control" rows="2" wire:model.defer="meta_key_en" placeholder="e.g. software, web, apps"></textarea>
+            <textarea class="form-control" rows="2" wire:model.defer="meta_key_en"></textarea>
             @include('dashboard.includes.error', ['property' => 'meta_key_en'])
         </div>
 
@@ -186,7 +174,6 @@
             @include('dashboard.includes.error', ['property' => 'meta_desc_en'])
         </div>
 
-        {{-- ========== OTHERS ========== --}}
         <h2 class="text-center mt-3" style="color: blue">{{ __('dashboard.other') }}</h2>
         <hr style="color: blue" class="mb-2">
 
@@ -200,19 +187,6 @@
                 <label class="form-label">{{ __('dashboard.site-promo') }}</label>
                 <input type="text" class="form-control" wire:model.defer="promotion_url">
                 @include('dashboard.includes.error', ['property' => 'promotion_url'])
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="mb-1 col-md-6">
-                <label class="form-label">{{ __('dashboard.min-order-merchant') }}</label>
-                <input type="number" step="0.01" class="form-control" wire:model.defer="min_order_merchant">
-                @include('dashboard.includes.error', ['property' => 'min_order_merchant'])
-            </div>
-            <div class="mb-1 col-md-6">
-                <label class="form-label">{{ __('dashboard.min-order-semi-merchant') }}</label>
-                <input type="number" step="0.01" class="form-control" wire:model.defer="min_order_semi_merchant">
-                @include('dashboard.includes.error', ['property' => 'min_order_semi_merchant'])
             </div>
         </div>
 
