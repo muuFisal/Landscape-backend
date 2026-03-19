@@ -65,9 +65,28 @@ class SettingsController extends Controller
         return view('dashboard.settings.gallery.items');
     }
 
+    public function servicesPage()
+    {
+        return view('dashboard.settings.services.index');
+    }
+
+    public function services()
+    {
+        return view('dashboard.services.index');
+    }
+
+    public function workPage()
+    {
+        return view('dashboard.settings.work.index');
+    }
+
+    public function projects()
+    {
+        return view('dashboard.projects.index');
+    }
+
     public function contacts()
     {
         return view('dashboard.contacts.index');
     }
-
 }

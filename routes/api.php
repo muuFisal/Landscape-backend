@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgotController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +21,15 @@ Route::get('/request-service',      [SettingsController::class, 'requestService'
 Route::get('/gallery-page',         [SettingsController::class, 'galleryPage']);
 Route::get('/gallery-items',        [SettingsController::class, 'galleryItems']);
 ## ================== SETTINGS ================== ##
+
+## ================== CONTENT ================== ##
+Route::get('/services-page',        [ProjectController::class, 'servicesPage']);
+Route::get('/services',             [ProjectController::class, 'services']);
+Route::get('/work-page',            [ProjectController::class, 'workPage']);
+Route::get('/projects',             [ProjectController::class, 'projects']);
+Route::get('/projects/{slug}',      [ProjectController::class, 'projectDetails']);
+Route::get('/projects/{slug}/related', [ProjectController::class, 'relatedProjects']);
+## ================== CONTENT ================== ##
 
 ## ================== LOOKUPS (Mobile) ================== ##
 Route::get('/countries',                            [LocationController::class, 'countries']);

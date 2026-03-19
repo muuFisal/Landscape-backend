@@ -86,6 +86,11 @@ Route::group([
         Route::get('request-service',     [SettingsController::class, 'requestService'])->middleware('can:request_service')->name('request-service');
         Route::get('gallery-page',         [SettingsController::class, 'galleryPage'])->middleware('can:gallery_page')->name('gallery-page');
         Route::get('gallery-items',        [SettingsController::class, 'galleryItems'])->middleware('can:gallery_items')->name('gallery-items');
+
+        Route::get('services-page',        [SettingsController::class, 'servicesPage'])->middleware('can:services_page')->name('services-page');
+        Route::get('services',             [SettingsController::class, 'services'])->middleware('can:services')->name('services');
+        Route::get('work-page',            [SettingsController::class, 'workPage'])->middleware('can:work_page')->name('work-page');
+        Route::get('projects',             [SettingsController::class, 'projects'])->middleware('can:projects')->name('projects');
         ############################### End settings Routes ############################################
 
     });
