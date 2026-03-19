@@ -26,10 +26,10 @@
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-primary" wire:click="$dispatch('editProject', { id: {{ $item->id }} })">
-                                    <i data-feather="edit-2"></i>
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                                 <button type="button" class="btn btn-outline-danger" wire:click="$dispatch('deleteItem', { id: {{ $item->id }} })">
-                                    <i data-feather="trash"></i>
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
                         </td>

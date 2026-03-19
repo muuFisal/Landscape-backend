@@ -9,7 +9,7 @@
                     <h4 class="card-title">{{ __('dashboard.projects') }}</h4>
                     <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal"
                         data-bs-target="#createModal">
-                        <i data-feather='plus'></i> {{ __('dashboard.add-item') }}
+                        <i class="fa-solid fa-plus"></i> {{ __('dashboard.add-item') }}
                     </button>
                 </div>
                 @livewire('dashboard.projects.project-create')
@@ -59,8 +59,8 @@
                 Swal.fire({ title: "{{ __('dashboard.success') }}", text: "{{ __('dashboard.item_deleted_successfully') }}", icon: "success", timer: 1000 });
             });
 
-            window.addEventListener('open-edit-modal', event => { $('#editModal').modal('show'); });
-            window.addEventListener('close-edit-modal', event => { $('#editModal').modal('hide'); });
+            window.addEventListener('open-edit-modal', event => { $('#updateModal').modal('show'); });
+            window.addEventListener('close-edit-modal', event => { $('#updateModal').modal('hide'); });
             window.addEventListener('close-modal', event => { $('#createModal').modal('hide'); });
         });
     </script>

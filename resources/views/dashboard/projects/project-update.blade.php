@@ -1,4 +1,4 @@
-<x-edit-modal title="{{ __('dashboard.update-project') }}">
+<x-update-modal title="{{ __('dashboard.update-project') }}">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -115,13 +115,13 @@
                     <div class="col-md-6 mb-50 d-flex gap-50">
                         <input type="text" class="form-control form-control-sm" wire:model.defer="facts.{{ $index }}" placeholder="Fact/Tag">
                         <button type="button" class="btn btn-sm btn-outline-danger" wire:click="removeFact({{ $index }})">
-                            <i data-feather="x"></i>
+                            <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
                 @endforeach
                 <div class="col-12 mt-50">
                     <button type="button" class="btn btn-sm btn-outline-success" wire:click="addFact">
-                        <i data-feather="plus"></i> {{ __('dashboard.add-fact') }}
+                        <i class="fa-solid fa-plus"></i> {{ __('dashboard.add-fact') }}
                     </button>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                                 style="top: 5px; right: 20px;"
                                 wire:click="deleteProjectImage({{ $img['id'] }})"
                                 onclick="return confirm('{{ __('dashboard.are_you_sure') }}')">
-                            <i data-feather="trash"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 @empty
@@ -166,4 +166,4 @@
             </div>
         </div>
     </div>
-</x-edit-modal>
+</x-update-modal>

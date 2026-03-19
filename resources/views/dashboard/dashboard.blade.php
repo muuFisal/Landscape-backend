@@ -18,7 +18,7 @@
                                 <div class="d-flex flex-row">
                                     <div class="avatar bg-light-primary me-2">
                                         <div class="avatar-content">
-                                            <i data-feather="trending-up" class="avatar-icon"></i>
+                                            <i class="avatar-icon fa-solid fa-chart-line"></i>
                                         </div>
                                     </div>
                                     <div class="my-auto">
@@ -31,7 +31,7 @@
                                 <div class="d-flex flex-row">
                                     <div class="avatar bg-light-info me-2">
                                         <div class="avatar-content">
-                                            <i data-feather="user" class="avatar-icon"></i>
+                                            <i class="avatar-icon fa-solid fa-user"></i>
                                         </div>
                                     </div>
                                     <div class="my-auto">
@@ -44,7 +44,7 @@
                                 <div class="d-flex flex-row">
                                     <div class="avatar bg-light-danger me-2">
                                         <div class="avatar-content">
-                                            <i data-feather="box" class="avatar-icon"></i>
+                                            <i class="avatar-icon fa-solid fa-box"></i>
                                         </div>
                                     </div>
                                     <div class="my-auto">
@@ -57,7 +57,7 @@
                                 <div class="d-flex flex-row">
                                     <div class="avatar bg-light-success me-2">
                                         <div class="avatar-content">
-                                            <i data-feather="dollar-sign" class="avatar-icon"></i>
+                                            <i class="avatar-icon fa-solid fa-dollar-sign"></i>
                                         </div>
                                     </div>
                                     <div class="my-auto">

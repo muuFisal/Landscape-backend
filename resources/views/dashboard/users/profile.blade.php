@@ -24,7 +24,7 @@
                         <div class="d-flex justify-content-around my-2 pt-75">
                             {{-- <div class="d-flex align-items-start me-2">
                                 <span class="badge bg-light-primary p-75 rounded">
-                                    <i data-feather="check" class="font-medium-2"></i>
+                                    <i class="font-medium-2 fa-solid fa-check"></i>
                                 </span>
                                 <div class="ms-75">
                                     <h4 class="mb-0">{{ $user->orders->count() }}</h4>
@@ -33,7 +33,7 @@
                             </div> --}}
                             {{-- <div class="d-flex align-items-start">
                                 <span class="badge bg-light-primary p-75 rounded">
-                                    <i data-feather="heart" class="font-medium-2"></i>
+                                    <i class="font-medium-2 fa-solid fa-heart"></i>
                                 </span>
                                 <div class="ms-75">
                                     <h4 class="mb-0">{{ $user->wishlists->count() }}</h4>
@@ -81,29 +81,29 @@
                 <ul class="nav nav-pills mb-2">
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('dashboard.user.profile', ['id' => $user->id]) }}">
-                            <i data-feather="user" class="font-medium-3 me-50"></i>
+                            <i class="fa-solid fa-user font-medium-3 me-50"></i>
                             <span class="fw-bold">{{ __('dashboard.account') }}</span></a>
                     </li>
                     {{-- <li class="nav-item">
                     <a class="nav-link" href="app-user-view-security.html">
-                        <i data-feather="lock" class="font-medium-3 me-50"></i>
+                        <i class="font-medium-3 me-50 fa-solid fa-lock"></i>
                         <span class="fw-bold">Security</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="app-user-view-billing.html">
-                        <i data-feather="bookmark" class="font-medium-3 me-50"></i>
+                        <i class="font-medium-3 me-50 fa-solid fa-bookmark"></i>
                         <span class="fw-bold">Billing & Plans</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="app-user-view-notifications.html">
-                        <i data-feather="bell" class="font-medium-3 me-50"></i><span class="fw-bold">Notifications</span>
+                        <i class="font-medium-3 me-50 fa-solid fa-bell"></i><span class="fw-bold">Notifications</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="app-user-view-connections.html">
-                        <i data-feather="link" class="font-medium-3 me-50"></i><span class="fw-bold">Connections</span>
+                        <i class="font-medium-3 me-50 fa-solid fa-link"></i><span class="fw-bold">Connections</span>
                     </a>
                 </li> --}}
                 </ul>

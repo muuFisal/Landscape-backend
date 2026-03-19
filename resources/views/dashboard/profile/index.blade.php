@@ -12,14 +12,14 @@
                         <!-- account -->
                         <li class="nav-item">
                             <a class="nav-link @yield('profile-active')" href="{{route('dashboard.profile')}}">
-                                <i data-feather="user" class="font-medium-3 me-50"></i>
+                                <i class="fa-solid fa-user font-medium-3 me-50"></i>
                                 <span class="fw-bold">{{__('dashboard.account')}}</span>
                             </a>
                         </li>
                         <!-- security -->
                         <li class="nav-item">
                             <a class="nav-link @yield('security-active')" href="{{route('dashboard.security')}}">
-                                <i data-feather="lock" class="font-medium-3 me-50"></i>
+                                <i class="fa-solid fa-lock font-medium-3 me-50"></i>
                                 <span class="fw-bold">{{__('dashboard.security')}}</span>
                             </a>
                         </li>

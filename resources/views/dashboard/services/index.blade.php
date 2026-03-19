@@ -10,7 +10,7 @@
                     <h4 class="card-title">{{ __('dashboard.services') }}</h4>
                     <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal"
                         data-bs-target="#createModal">
-                        <i data-feather='plus'></i> {{ __('dashboard.add-item') }}
+                        <i class="fa-solid fa-plus"></i> {{ __('dashboard.add-item') }}
                     </button>
                 </div>
                 @livewire('dashboard.services.service-create')
@@ -87,11 +87,11 @@
             });
 
             window.addEventListener('open-edit-modal', event => {
-                $('#editModal').modal('show');
+                $('#updateModal').modal('show');
             });
 
             window.addEventListener('close-edit-modal', event => {
-                $('#editModal').modal('hide');
+                $('#updateModal').modal('hide');
             });
             
             window.addEventListener('close-modal', event => {

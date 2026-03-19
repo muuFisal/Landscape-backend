@@ -9,7 +9,7 @@
                 <div class="card-header border-bottom">
                     <h4 class="card-title">{{ __('dashboard.gallery-items') }}</h4>
                     <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal" data-bs-target="#createModal">
-                        <i data-feather='plus'></i> {{ __('dashboard.create-gallery-item') }}
+                        <i class="fa-solid fa-plus"></i> {{ __('dashboard.create-gallery-item') }}
                     </button>
                 </div>
                 @livewire('dashboard.settings.gallery.gallery-create')

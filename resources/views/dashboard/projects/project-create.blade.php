@@ -123,13 +123,13 @@
                     <div class="col-md-6 mb-50 d-flex gap-50">
                         <input type="text" class="form-control form-control-sm" wire:model.defer="facts.{{ $index }}" placeholder="Fact/Tag">
                         <button type="button" class="btn btn-sm btn-outline-danger" wire:click="removeFact({{ $index }})">
-                            <i data-feather="x"></i>
+                            <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
                 @endforeach
                 <div class="col-12 mt-50">
                     <button type="button" class="btn btn-sm btn-outline-success" wire:click="addFact">
-                        <i data-feather="plus"></i> {{ __('dashboard.add-fact') }}
+                        <i class="fa-solid fa-plus"></i> {{ __('dashboard.add-fact') }}
                     </button>
                 </div>
             </div>
