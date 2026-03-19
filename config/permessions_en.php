@@ -11,5 +11,9 @@ return [
     'why_choose'       =>'Manage Why Choose',
     'gallery_page'     =>'Manage Gallery Page',
     'gallery_items'    =>'Manage Gallery Items',
+    'services_page'    =>'Manage Services Page',
+    'services'         =>'Manage Services',
+    'work_page'        =>'Manage Work Page',
+    'projects'         =>'Manage Projects',
     'request_service'  =>'Manage Request Service',
 ];

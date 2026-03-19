@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             SettingsSeeder::class,
             UserSeeder::class,
             ContentSeeder::class,
+            ServicesPageSeeder::class,
+            WorkPageSeeder::class,
+            ServiceSeeder::class,
+            ProjectSeeder::class,
         ]);
     }
 }

@@ -83,10 +83,11 @@
             @endcan
 
 
-                                    @if(auth()->user()->can('gallery_page') || auth()->user()->can('gallery_items'))
-                        <li class="@yield('gallery-open')">
-                            <a class="d-flex align-items-center" href="#"><i class="fa-regular fa-images"></i><span
-                                    class="menu-item text-truncate">{{ __('dashboard.gallery') }}</span></a>
+                        @if(auth()->user()->can('gallery_page') || auth()->user()->can('gallery_items'))
+                        <li class="nav-item @yield('gallery-open')">
+                            <a class="d-flex align-items-center" href="#">
+                                <i data-feather="image"></i>
+                                <span class="menu-title text-truncate">{{ __('dashboard.gallery') }}</span></a>
                             <ul class="menu-content">
                                 @can('gallery_page')
                                 <li><a class="@yield('gallery-page-active') d-flex align-items-center"
@@ -104,6 +105,48 @@
                         </li>
                         @endif
 
+
+            @if(auth()->user()->can('services_page') || auth()->user()->can('services'))
+                <li class="nav-item @yield('services-open')">
+                    <a class="d-flex align-items-center" href="#"><i data-feather="grid"></i><span
+                            class="menu-title text-truncate">{{ __('dashboard.services') }}</span></a>
+                    <ul class="menu-content">
+                        @can('services_page')
+                        <li><a class="@yield('services-page-active') d-flex align-items-center"
+                                href="{{ route('dashboard.services-page') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.services-page') }}</span></a>
+                        </li>
+                        @endcan
+                        @can('services')
+                        <li><a class="@yield('services-active') d-flex align-items-center"
+                                href="{{ route('dashboard.services') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.services-items') }}</span></a>
+                        </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(auth()->user()->can('work_page') || auth()->user()->can('projects'))
+                <li class="nav-item @yield('projects-open')">
+                    <a class="d-flex align-items-center" href="#"><i data-feather="layers"></i><span
+                            class="menu-title text-truncate">{{ __('dashboard.projects') }}</span></a>
+                    <ul class="menu-content">
+                        @can('work_page')
+                        <li><a class="@yield('work-page-active') d-flex align-items-center"
+                                href="{{ route('dashboard.work-page') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.work-page') }}</span></a>
+                        </li>
+                        @endcan
+                        @can('projects')
+                        <li><a class="@yield('projects-active') d-flex align-items-center"
+                                href="{{ route('dashboard.projects') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.projects-items') }}</span></a>
+                        </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
 
 
             @can('settings')
