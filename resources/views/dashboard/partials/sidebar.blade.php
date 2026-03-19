@@ -131,6 +131,38 @@
                                     data-i18n="Roles">{{ __('dashboard.faqs-settings') }}</span></a>
                         </li>
                     </ul>
+                    @can('why_choose')
+                    <ul class="menu-content">
+                        <li><a class="@yield('why-choose-active') d-flex align-items-center"
+                                href="{{ route('dashboard.why-choose') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.why-choose-section') }}</span></a>
+                        </li>
+                    </ul>
+                    @endcan
+                    @can('request_service')
+                    <ul class="menu-content">
+                        <li><a class="@yield('request-service-active') d-flex align-items-center"
+                                href="{{ route('dashboard.request-service') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.request-service-section') }}</span></a>
+                        </li>
+                    </ul>
+                    @endcan
+                    @can('gallery_page')
+                    <ul class="menu-content">
+                        <li><a class="@yield('gallery-page-active') d-flex align-items-center"
+                                href="{{ route('dashboard.gallery-page') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.gallery-page') }}</span></a>
+                        </li>
+                    </ul>
+                    @endcan
+                    @can('gallery_items')
+                    <ul class="menu-content">
+                        <li><a class="@yield('gallery-items-active') d-flex align-items-center"
+                                href="{{ route('dashboard.gallery-items') }}"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.gallery-items') }}</span></a>
+                        </li>
+                    </ul>
+                    @endcan
                 </li>
             @endcan
 

@@ -291,5 +291,18 @@
     // Livewire.on('changeStatus', data => {
     //     console.log('Received changeStatus event:', data);
     // });
+    window.addEventListener('UpdateMS', event => {
+        Swal.fire({
+            position: 'top-start',
+            icon: 'success',
+            title: '{{ __('dashboard.update-successfully') }}',
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+        });
+    })
 </script>
 {{-- End optimize modal in livewire to open and close --}}

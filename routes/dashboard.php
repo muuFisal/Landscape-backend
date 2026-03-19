@@ -81,6 +81,11 @@ Route::group([
         Route::get('faqs',                [SettingsController::class, 'faqs'])->middleware('can:settings')->name('faqs.setting');
         Route::get('privacy',             [SettingsController::class, 'privacy'])->middleware('can:settings')->name('privacy.setting');
         Route::get('terms',               [SettingsController::class, 'terms'])->middleware('can:settings')->name('terms.setting');
+
+        Route::get('why-choose',          [SettingsController::class, 'whyChoose'])->middleware('can:why_choose')->name('why-choose');
+        Route::get('request-service',     [SettingsController::class, 'requestService'])->middleware('can:request_service')->name('request-service');
+        Route::get('gallery-page',         [SettingsController::class, 'galleryPage'])->middleware('can:gallery_page')->name('gallery-page');
+        Route::get('gallery-items',        [SettingsController::class, 'galleryItems'])->middleware('can:gallery_items')->name('gallery-items');
         ############################### End settings Routes ############################################
 
     });

@@ -36,10 +36,10 @@ class SettingsController extends Controller
         $about = $this->settingService->getAbout();
 
         if (! $about) {
-            return ApiResponse::sendResponse(404, __('dashboard.somthing-went-wrong'), []);
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
         }
 
-        return ApiResponse::sendResponse(200, __('dashboard.about-retrieved-successfully'), new AboutResource($about));
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new AboutResource($about));
     }
 
     public function privacy()
@@ -47,10 +47,10 @@ class SettingsController extends Controller
         $privacy = $this->settingService->getPrivacy();
 
         if (! $privacy) {
-            return ApiResponse::sendResponse(404, __('dashboard.somthing-went-wrong'), []);
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
         }
 
-        return ApiResponse::sendResponse(200, __('dashboard.privacy-retrieved-successfully'), new PrivacyResource($privacy));
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new PrivacyResource($privacy));
     }
 
     public function terms()
@@ -58,17 +58,17 @@ class SettingsController extends Controller
         $terms = $this->settingService->getTerms();
 
         if (! $terms) {
-            return ApiResponse::sendResponse(404, __('dashboard.somthing-went-wrong'), []);
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
         }
 
-        return ApiResponse::sendResponse(200, __('dashboard.privacy-retrieved-successfully'), new TermsResource($terms));
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new TermsResource($terms));
     }
 
     public function faq(Request $request)
     {
         $faq = $this->settingService->getFaqs((int) $request->integer('per_page', 10));
 
-        return ApiResponse::sendResponse(200, __('dashboard.faq-retrieved-successfully'), FaqResource::collection($faq), [
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), FaqResource::collection($faq), [
             'total' => $faq->total(),
             'current_page' => $faq->currentPage(),
             'last_page' => $faq->lastPage(),
@@ -86,11 +86,56 @@ class SettingsController extends Controller
     public function banners()
     {
         $banners = $this->settingService->getBanners();
-
+        
         if ($banners->isEmpty()) {
-            return ApiResponse::sendResponse(404, __('front.no-banners-found'), []);
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
         }
 
-        return ApiResponse::sendResponse(200, __('front.retrieved-successfully'), BannerResource::collection($banners));
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), BannerResource::collection($banners));
+    }
+
+    public function whyChoose()
+    {
+        $whyChoose = $this->settingService->whyChoose();
+
+        if (!$whyChoose) {
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
+        }
+
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new \App\Http\Resources\WhyChooseResource($whyChoose));
+    }
+
+    public function requestService()
+    {
+        $requestService = $this->settingService->requestService();
+
+        if (!$requestService) {
+            return ApiResponse::sendResponse(404, __('front.somthing-went-wrong'), []);
+        }
+
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new \App\Http\Resources\RequestServiceResource($requestService));
+    }
+
+    public function galleryPage()
+    {
+        $galleryPage = $this->settingService->galleryPage();
+
+        if (!$galleryPage) {
+            return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), []);
+        }
+
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), new \App\Http\Resources\GalleryPageResource($galleryPage));
+    }
+
+    public function galleryItems(Request $request)
+    {
+        $galleryItems = $this->settingService->galleryItems($request->integer('per_page', 10));
+
+        return ApiResponse::sendResponse(200, __('front.Settings-retrieved-successfully'), \App\Http\Resources\GalleryResource::collection($galleryItems) , [
+            'total' => $galleryItems->total(),
+            'current_page' => $galleryItems->currentPage(),
+            'last_page' => $galleryItems->lastPage(),
+            'per_page' => $galleryItems->perPage(),
+        ]);
     }
 }

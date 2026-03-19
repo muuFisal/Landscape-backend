@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('request_service_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('banner')->nullable();
+            $table->json('small_label')->nullable();
             $table->json('title')->nullable();
-            $table->json('primary_label')->nullable();
-            $table->json('secondary_label')->nullable();
-            $table->json('sub_labels')->nullable();
-            $table->integer('sort_order')->default(0);
+            $table->json('description')->nullable();
+            $table->json('button_text')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('request_service_sections');
     }
 };

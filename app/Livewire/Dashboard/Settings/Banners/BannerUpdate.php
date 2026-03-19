@@ -3,30 +3,45 @@
 namespace App\Livewire\Dashboard\Settings\Banners;
 
 use App\Models\Banner;
+use App\Utils\ImageManger;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use App\Livewire\Dashboard\Settings\Banners\BannerData;
-use App\Utils\ImageManger;
 
-class BannerCreate extends Component
+class BannerUpdate extends Component
 {
     use WithFileUploads;
 
-    public $banner, $status = 1, $sort_order = 0;
+    public Banner $bannerModel;
+    public $banner, $status, $sort_order;
     public $title_ar, $title_en, $primary_label_ar, $primary_label_en, $secondary_label_ar, $secondary_label_en;
-    public $sub_labels = []; // Array of ['ar' => '', 'en' => '']
+    public $sub_labels = [];
 
     protected ImageManger $imageManager;
+
+    protected $listeners = ['editBanner'];
 
     public function boot(ImageManger $imageManager)
     {
         $this->imageManager = $imageManager;
     }
 
-    public function mount()
+    public function editBanner($id)
     {
-        $this->sub_labels = [['ar' => '', 'en' => '']];
+        $this->bannerModel = Banner::findOrFail($id);
+        $this->status = $this->bannerModel->status;
+        $this->sort_order = $this->bannerModel->sort_order;
+        
+        $this->title_ar = $this->bannerModel->getTranslation('title', 'ar', false);
+        $this->title_en = $this->bannerModel->getTranslation('title', 'en', false);
+        $this->primary_label_ar = $this->bannerModel->getTranslation('primary_label', 'ar', false);
+        $this->primary_label_en = $this->bannerModel->getTranslation('primary_label', 'en', false);
+        $this->secondary_label_ar = $this->bannerModel->getTranslation('secondary_label', 'ar', false);
+        $this->secondary_label_en = $this->bannerModel->getTranslation('secondary_label', 'en', false);
+        
+        $this->sub_labels = $this->bannerModel->sub_labels ?? [['ar' => '', 'en' => '']];
+
+        $this->dispatch('updateModalToggle');
     }
 
     public function addSubLabel()
@@ -43,7 +58,7 @@ class BannerCreate extends Component
     public function rules()
     {
         return [
-            'banner' => 'required|mimes:jpg,jpeg,png,gif,webp,avif,bmp,svg|max:2048',
+            'banner' => 'nullable|mimes:jpg,jpeg,png,gif,webp,avif,bmp,svg|max:2048',
             'status' => 'required|in:0,1',
             'sort_order' => 'required|integer|min:0',
             'title_ar' => 'required|string|max:255',
@@ -65,27 +80,29 @@ class BannerCreate extends Component
         $data = [
             'status' => $this->status,
             'sort_order' => $this->sort_order,
-            'title' => ['ar' => $this->title_ar, 'en' => $this->title_en],
-            'primary_label' => ['ar' => $this->primary_label_ar, 'en' => $this->primary_label_en],
-            'secondary_label' => ['ar' => $this->secondary_label_ar, 'en' => $this->secondary_label_en],
             'sub_labels' => array_values($this->sub_labels),
         ];
 
+        $this->bannerModel->setTranslations('title', ['ar' => $this->title_ar, 'en' => $this->title_en]);
+        $this->bannerModel->setTranslations('primary_label', ['ar' => $this->primary_label_ar, 'en' => $this->primary_label_en]);
+        $this->bannerModel->setTranslations('secondary_label', ['ar' => $this->secondary_label_ar, 'en' => $this->secondary_label_en]);
+
         if ($this->banner instanceof TemporaryUploadedFile && $this->banner->isValid()) {
+            if ($this->bannerModel->banner) {
+                $this->imageManager->deleteImage($this->bannerModel->banner);
+            }
             $data['banner'] = $this->imageManager->uploadImage('uploads/settings/banners', $this->banner);
         }
 
-        Banner::create($data);
+        $this->bannerModel->update($data);
 
-        $this->reset(['banner', 'title_ar', 'title_en', 'primary_label_ar', 'primary_label_en', 'secondary_label_ar', 'secondary_label_en']);
-        $this->sub_labels = [['ar' => '', 'en' => '']];
-        $this->dispatch('bannerAddMS');
-        $this->dispatch('createModalToggle');
+        $this->dispatch('bannerUpdateMS');
+        $this->dispatch('updateModalToggle');
         $this->dispatch('refreshData')->to(BannerData::class);
     }
 
     public function render()
     {
-        return view('dashboard.settings.banners.banner-create');
+        return view('dashboard.settings.banners.banner-update');
     }
 }

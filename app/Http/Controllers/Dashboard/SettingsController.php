@@ -45,6 +45,26 @@ class SettingsController extends Controller
         return view('dashboard.settings.banners.index');
     }
 
+    public function whyChoose()
+    {
+        return view('dashboard.settings.why-choose.index');
+    }
+
+    public function requestService()
+    {
+        return view('dashboard.settings.request-service.index');
+    }
+
+    public function galleryPage()
+    {
+        return view('dashboard.settings.gallery.index');
+    }
+
+    public function galleryItems()
+    {
+        return view('dashboard.settings.gallery.items');
+    }
+
     public function contacts()
     {
         return view('dashboard.contacts.index');

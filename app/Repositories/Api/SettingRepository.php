@@ -39,7 +39,29 @@ class SettingRepository
 
     public function activeBanners()
     {
-        return Banner::query()->where('status', 1)->get();
+        return Banner::query()->where('status', 1)->orderBy('sort_order', 'asc')->get();
+    }
+
+    public function firstWhyChoose()
+    {
+        return \App\Models\WhyChooseSection::query()->where('status', 1)->with(['items' => function($q) {
+            $q->where('status', 1)->orderBy('sort_order', 'asc');
+        }])->first();
+    }
+
+    public function firstRequestService()
+    {
+        return \App\Models\RequestServiceSection::query()->where('status', 1)->first();
+    }
+
+    public function firstGalleryPage()
+    {
+        return \App\Models\GalleryPage::query()->first();
+    }
+
+    public function activeGalleryItems(int $perPage = 10)
+    {
+        return \App\Models\Gallery::query()->where('status', 1)->orderBy('sort_order', 'asc')->paginate($perPage);
     }
 
     public function createContact(array $data): Contact

@@ -1,40 +1,38 @@
 <?php
 
-namespace App\Livewire\Dashboard\Settings\Banners;
+namespace App\Livewire\Dashboard\Settings\Gallery;
 
-use App\Models\Banner;
+use App\Models\Gallery;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class BannerData extends Component
+class GalleryData extends Component
 {
     use WithPagination;
     protected $listeners = ['refreshData' => '$refresh', 'deleteItem'];
 
     public function updateStatus($itemId, $newStatus)
     {
-        $item = Banner::find($itemId);
+        $item = Gallery::find($itemId);
         if (!$item) return;
         $item->status = $newStatus;
         $item->save();
         $this->dispatch('StatusUpdateMS');
     }
 
-    public function deleteItem($id)
+    public function deleteItem($data)
     {
-        $item = Banner::find($id);
+        $id = is_array($data) ? $data['id'] : $data;
+        $item = Gallery::find($id);
         if ($item) {
             $item->delete();
             $this->dispatch('itemDeleted');
         }
-        if (!$item) return;
     }
-
 
     public function render()
     {
-        $data = Banner::orderBy('sort_order', 'asc')
-            ->paginate(10);
-        return view('dashboard.settings.banners.banner-data', compact('data'));
+        $data = Gallery::orderBy('sort_order', 'asc')->paginate(10);
+        return view('dashboard.settings.gallery.gallery-data', compact('data'));
     }
 }

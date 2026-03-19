@@ -30,5 +30,8 @@ return [
     'variants'         =>'Manage Variants',
     'tags'             =>'Manage Tags',
     'chats'            =>'Manage Chats',
-
+    'why_choose'       =>'Manage Why Choose',
+    'gallery_page'     =>'Manage Gallery Page',
+    'gallery_items'    =>'Manage Gallery Items',
+    'request_service'  =>'Manage Request Service',
 ];

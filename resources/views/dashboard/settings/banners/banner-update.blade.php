@@ -1,4 +1,4 @@
-<x-create-modal title="{{ __('dashboard.create-banner') }}">
+<x-update-modal title="{{ __('dashboard.update-banner') }}">
     <div class="row">
         <div class="col-md-6">
             <div class="mb-1">
@@ -87,6 +87,10 @@
                     <div class="mt-1">
                         <img src="{{ $banner->temporaryUrl() }}" width="150" class="rounded border">
                     </div>
+                @elseif (isset($this->bannerModel->banner))
+                    <div class="mt-1">
+                        <img src="{{ asset($this->bannerModel->banner) }}" width="150" class="rounded border">
+                    </div>
                 @endif
                 @include('dashboard.includes.error', ['property' => 'banner'])
             </div>
@@ -109,4 +113,4 @@
             </div>
         </div>
     </div>
-</x-create-modal>
+</x-update-modal>

@@ -1,78 +1,56 @@
-@extends('dashboard.master', ['title' => 'Banners'])
-@section('banners-active', 'active')
+@extends('dashboard.master', ['title' => __('dashboard.gallery-items')])
+@section('gallery-items-active', 'active')
 @section('settings-open', 'open')
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">{{ __('dashboard.banners') }}</h4>
-                    <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal"
-                        data-bs-target="#createModal">
-                        <i data-feather='plus'></i> {{ __('dashboard.create-banner') }}
+                <div class="card-header border-bottom">
+                    <h4 class="card-title">{{ __('dashboard.gallery-items') }}</h4>
+                    <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <i data-feather='plus'></i> {{ __('dashboard.create-gallery-item') }}
                     </button>
                 </div>
-                @livewire('dashboard.settings.banners.banner-create')
-                @livewire('dashboard.settings.banners.banner-update')
-                <div class="card-body">
-                    @livewire('dashboard.settings.banners.banner-data')
+                @livewire('dashboard.settings.gallery.gallery-create')
+                @livewire('dashboard.settings.gallery.gallery-update')
+                <div class="card-body mt-2">
+                    @livewire('dashboard.settings.gallery.gallery-data')
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @push('js')
-    {{-- Scripts from livewire success msg --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            Livewire.on('bannerAddMS', function() {
+            Livewire.on('galleryAddMS', function() {
                 Swal.fire({
                     position: 'top-start',
                     icon: 'success',
                     title: '{{ __('dashboard.add-successfully') }}',
                     showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
+                    timer: 1500
                 });
             });
-            Livewire.on('bannerUpdateMS', function() {
+            Livewire.on('galleryUpdateMS', function() {
                 Swal.fire({
                     position: 'top-start',
                     icon: 'success',
                     title: '{{ __('dashboard.updated-successfully') }}',
                     showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
+                    timer: 1500
                 });
             });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             Livewire.on('StatusUpdateMS', function() {
                 Swal.fire({
                     position: 'top-start',
                     icon: 'success',
                     title: '{{ __('dashboard.status-change') }}',
                     showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
+                    timer: 1500
                 });
             });
-        });
-    </script>
-    {{-- End scripts from livewire success msg --}}
-    {{-- Scripts from seewtalert delete livewire --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Livewire.on('bannerDelete', function(data) {
+            Livewire.on('deleteItemConfirm', function(data) {
                 Swal.fire({
                     title: "{{ __('dashboard.are_you_sure') }}",
                     text: "{{ __('dashboard.confirm_delete_message') }}",
@@ -82,15 +60,11 @@
                     cancelButtonText: "{{ __('dashboard.cancel') }}"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.dispatch('deleteItem', {
-                            id: data.id
-                        });
+                        Livewire.dispatch('deleteItem', { id: data.id });
                     }
                 });
             });
-
             window.addEventListener('itemDeleted', function() {
-                Livewire.dispatch('refreshData');
                 Swal.fire({
                     title: "{{ __('dashboard.success') }}",
                     text: "{{ __('dashboard.item_deleted_successfully') }}",
@@ -100,5 +74,4 @@
             });
         });
     </script>
-    {{-- End scripts from seewtalert delete livewire --}}
 @endpush

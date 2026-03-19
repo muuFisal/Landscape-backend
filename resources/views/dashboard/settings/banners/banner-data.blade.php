@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>{{ __('dashboard.title') }}</th>
                 <th>{{ __('dashboard.banner') }}</th>
                 <th>{{ __('dashboard.status') }}</th>
                 <th>{{ __('dashboard.actions') }}</th>
@@ -13,6 +14,7 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->title }}</td>
                         <td><img src="{{ asset($item->banner) }}" alt="banner" width="150"></td>
                         <td>
                             <div class="form-check form-switch mb-2">
@@ -22,6 +24,11 @@
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
+                                <button class="btn btn-warning waves-effect waves-float waves-light me-1"
+                                    wire:click="$dispatchTo('dashboard.settings.banners.banner-update', 'editBanner', {id: {{ $item->id }}})"
+                                    title="{{ __('dashboard.edit') }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
                                 <a class="btn btn-danger waves-effect waves-float waves-light" href="#"
                                     data-id="{{ $item->id }}"
                                     wire:click.prevent="$dispatch('bannerDelete', {id: {{ $item->id }}})"
