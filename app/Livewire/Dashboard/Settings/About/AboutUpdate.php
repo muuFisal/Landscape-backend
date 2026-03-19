@@ -108,7 +108,7 @@ class AboutUpdate extends Component
 
         foreach (['about_image', 'mission_image', 'vision_image'] as $field) {
             $rules[$field] = $this->{$field} instanceof TemporaryUploadedFile
-                ? ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,avif,bmp', 'max:4096']
+                ? ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,avif,bmp,svg,ico', 'max:12288']
                 : ['nullable'];
         }
 
