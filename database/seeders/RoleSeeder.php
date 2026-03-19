@@ -15,13 +15,16 @@ class RoleSeeder extends Seeder
     {
         $permissions = array_keys(config('permessions_ar'));
 
-        Role::create([
-            'role' => [
-                'ar' => 'المدير',
-                'en' => 'manger',
-            ],
-            'permession' => json_encode($permissions),
-        ]);
+        Role::updateOrCreate(
+            ['role->en' => 'manger'],
+            [
+                'role' => [
+                    'ar' => 'المدير',
+                    'en' => 'manger',
+                ],
+                'permession' => json_encode($permissions),
+            ]
+        );
     }
 
 }

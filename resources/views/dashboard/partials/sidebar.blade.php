@@ -83,6 +83,28 @@
             @endcan
 
 
+                                    @if(auth()->user()->can('gallery_page') || auth()->user()->can('gallery_items'))
+                        <li class="@yield('gallery-open')">
+                            <a class="d-flex align-items-center" href="#"><i class="fa-regular fa-images"></i><span
+                                    class="menu-item text-truncate">{{ __('dashboard.gallery') }}</span></a>
+                            <ul class="menu-content">
+                                @can('gallery_page')
+                                <li><a class="@yield('gallery-page-active') d-flex align-items-center"
+                                        href="{{ route('dashboard.gallery-page') }}"><i data-feather="circle"></i><span
+                                            class="menu-item text-truncate">{{ __('dashboard.gallery-page') }}</span></a>
+                                </li>
+                                @endcan
+                                @can('gallery_items')
+                                <li><a class="@yield('gallery-items-active') d-flex align-items-center"
+                                        href="{{ route('dashboard.gallery-items') }}"><i data-feather="circle"></i><span
+                                            class="menu-item text-truncate">{{ __('dashboard.gallery-items') }}</span></a>
+                                </li>
+                                @endcan
+                            </ul>
+                        </li>
+                        @endif
+
+
 
             @can('settings')
                 <li class="nav-item @yield('settings-open')"><a class="d-flex align-items-center" href="#">
@@ -92,77 +114,41 @@
                     <ul class="menu-content">
                         <li><a class="@yield('settings-active') d-flex align-items-center"
                                 href="{{ route('dashboard.settings') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.genral-setting') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.general-settings') }}</span></a>
                         </li>
-                    </ul>
-                    <ul class="menu-content">
                         <li><a class="@yield('banners-active') d-flex align-items-center"
                                 href="{{ route('dashboard.banners') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.banners') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.banners') }}</span></a>
                         </li>
-                    </ul>
-                    <ul class="menu-content">
                         <li><a class="@yield('about-active') d-flex align-items-center"
                                 href="{{ route('dashboard.about.setting') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.about-setting') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.about-settings') }}</span></a>
                         </li>
-                    </ul>
-                    <ul class="menu-content">
                         <li><a class="@yield('privacy-active') d-flex align-items-center"
                                 href="{{ route('dashboard.privacy.setting') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.privacy-setting') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.privacy-settings') }}</span></a>
                         </li>
-                    </ul>
-                    <ul class="menu-content">
                         <li><a class="@yield('terms-active') d-flex align-items-center"
                                 href="{{ route('dashboard.terms.setting') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.terms-setting') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.terms-settings') }}</span></a>
                         </li>
-                    </ul>
-                    <ul class="menu-content">
                         <li><a class="@yield('faqs-active') d-flex align-items-center"
                                 href="{{ route('dashboard.faqs.setting') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate"
-                                    data-i18n="Roles">{{ __('dashboard.faqs-settings') }}</span></a>
+                                    class="menu-item text-truncate">{{ __('dashboard.faqs-settings') }}</span></a>
                         </li>
-                    </ul>
-                    @can('why_choose')
-                    <ul class="menu-content">
+                        @can('why_choose')
                         <li><a class="@yield('why-choose-active') d-flex align-items-center"
                                 href="{{ route('dashboard.why-choose') }}"><i data-feather="circle"></i><span
                                     class="menu-item text-truncate">{{ __('dashboard.why-choose-section') }}</span></a>
                         </li>
-                    </ul>
-                    @endcan
-                    @can('request_service')
-                    <ul class="menu-content">
+                        @endcan
+                        @can('request_service')
                         <li><a class="@yield('request-service-active') d-flex align-items-center"
                                 href="{{ route('dashboard.request-service') }}"><i data-feather="circle"></i><span
                                     class="menu-item text-truncate">{{ __('dashboard.request-service-section') }}</span></a>
                         </li>
+                        @endcan
                     </ul>
-                    @endcan
-                    @can('gallery_page')
-                    <ul class="menu-content">
-                        <li><a class="@yield('gallery-page-active') d-flex align-items-center"
-                                href="{{ route('dashboard.gallery-page') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate">{{ __('dashboard.gallery-page') }}</span></a>
-                        </li>
-                    </ul>
-                    @endcan
-                    @can('gallery_items')
-                    <ul class="menu-content">
-                        <li><a class="@yield('gallery-items-active') d-flex align-items-center"
-                                href="{{ route('dashboard.gallery-items') }}"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate">{{ __('dashboard.gallery-items') }}</span></a>
-                        </li>
-                    </ul>
-                    @endcan
                 </li>
             @endcan
 

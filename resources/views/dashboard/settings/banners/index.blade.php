@@ -1,4 +1,4 @@
-@extends('dashboard.master', ['title' => 'Banners'])
+@extends('dashboard.master', ['title' => __('dashboard.banners')])
 @section('banners-active', 'active')
 @section('settings-open', 'open')
 @section('content')

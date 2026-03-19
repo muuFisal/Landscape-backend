@@ -1,4 +1,4 @@
-@extends('dashboard.master', ['title' => 'Terms Setting'])
+@extends('dashboard.master', ['title' => __('dashboard.terms-settings')])
 @section('terms-active', 'active')
 @section('settings-open', 'open')
 @section('content')

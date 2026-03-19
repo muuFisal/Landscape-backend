@@ -1,5 +1,6 @@
 @extends('dashboard.master', ['title' => __('dashboard.gallery-items')])
 @section('gallery-items-active', 'active')
+@section('gallery-open', 'open')
 @section('settings-open', 'open')
 @section('content')
     <div class="row">

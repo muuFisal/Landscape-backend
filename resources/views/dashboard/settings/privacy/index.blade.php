@@ -1,4 +1,4 @@
-@extends('dashboard.master', ['title' => 'Privacy Setting'])
+@extends('dashboard.master', ['title' => __('dashboard.privacy-settings')])
 @section('privacy-active', 'active')
 @section('settings-open', 'open')
 @section('content')
