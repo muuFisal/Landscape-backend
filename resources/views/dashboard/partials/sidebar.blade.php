@@ -82,6 +82,16 @@
                 </li>
             @endcan
 
+            @can('contacts')
+                <li class="nav-item @yield('contacts-active')"><a class="d-flex align-items-center"
+                        href="{{ route('dashboard.contacts') }}"><i class="fa-solid fa-envelope-open-text"></i><span
+                            class="menu-title text-truncate">{{ __('dashboard.contacts') }}</span>
+                        <span
+                            class="badge badge-light-warning rounded-pill ms-auto me-1">{{ App\Models\Contact::count() }}</span>
+                    </a>
+                </li>
+            @endcan
+
 
                         @if(auth()->user()->can('gallery_page') || auth()->user()->can('gallery_items'))
                         <li class="nav-item @yield('gallery-open')">

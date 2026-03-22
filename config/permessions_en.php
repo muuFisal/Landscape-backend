@@ -15,5 +15,6 @@ return [
     'services'         =>'Manage Services',
     'work_page'        =>'Manage Work Page',
     'projects'         =>'Manage Projects',
+    'contacts'         =>'Manage Contacts',
     'request_service'  =>'Manage Request Service',
 ];

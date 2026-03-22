@@ -69,6 +69,7 @@ Route::group([
         Route::get('user/profile/{id}',      [UserController::class, 'userProfile'])->middleware('can:users')->name('user.profile');
         ############################### End Users Routes #########################################
 
+        Route::get('contacts',               [SettingsController::class, 'contacts'])->middleware('can:contacts')->name('contacts');
 
 
 
