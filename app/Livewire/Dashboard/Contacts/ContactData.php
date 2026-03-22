@@ -40,9 +40,8 @@ class ContactData extends Component
         $this->dispatch('open-contact-message-modal');
     }
 
-    public function deleteItem($data): void
+    public function deleteItem($id): void
     {
-        $id = is_array($data) ? ($data['id'] ?? null) : $data;
 
         if (!$id) {
             return;
