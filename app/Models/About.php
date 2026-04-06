@@ -37,6 +37,7 @@ class About extends Model
         'title',
         'desc',
         'image',
+        'second_image',
         'about_badge',
         'about_title',
         'about_description',

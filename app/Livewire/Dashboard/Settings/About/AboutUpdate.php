@@ -15,7 +15,7 @@ class AboutUpdate extends Component
 
     public About $about;
 
-    public $about_badge_ar, $about_badge_en, $about_title_ar, $about_title_en, $about_description_ar, $about_description_en, $about_image;
+    public $about_badge_ar, $about_badge_en, $about_title_ar, $about_title_en, $about_description_ar, $about_description_en, $about_image, $second_image;
     public $mission_badge_ar, $mission_badge_en, $mission_title_ar, $mission_title_en, $mission_description_ar, $mission_description_en, $mission_image;
     public $vision_badge_ar, $vision_badge_en, $vision_title_ar, $vision_title_en, $vision_description_ar, $vision_description_en, $vision_image;
     public $shapes_badge_ar, $shapes_badge_en, $shapes_title_ar, $shapes_title_en, $shapes_description_ar, $shapes_description_en;
@@ -48,6 +48,7 @@ class AboutUpdate extends Component
         }
 
         $this->about_image = $this->about->about_image ?: $this->about->image;
+        $this->second_image = $this->about->second_image;
         $this->mission_image = $this->about->mission_image;
         $this->vision_image = $this->about->vision_image;
         $this->shape_cards = is_array($this->about->shapes_items) && count($this->about->shapes_items)
@@ -106,7 +107,7 @@ class AboutUpdate extends Component
             'shape_cards.*.description.en' => ['required', 'string'],
         ];
 
-        foreach (['about_image', 'mission_image', 'vision_image'] as $field) {
+        foreach (['about_image', 'second_image', 'mission_image', 'vision_image'] as $field) {
             $rules[$field] = $this->{$field} instanceof TemporaryUploadedFile
                 ? ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,avif,bmp,svg,ico', 'max:12288']
                 : ['nullable'];
@@ -137,6 +138,7 @@ class AboutUpdate extends Component
         $this->validate();
 
         $this->uploadAndReplace('about_image', 'about_image');
+        $this->uploadAndReplace('second_image', 'second_image');
         $this->uploadAndReplace('mission_image', 'mission_image');
         $this->uploadAndReplace('vision_image', 'vision_image');
 

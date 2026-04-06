@@ -63,6 +63,21 @@
                         <input type="file" class="form-control" wire:model="{{ $meta['image'] }}">
                         @include('dashboard.includes.error', ['property' => $meta['image']])
                     </div>
+
+                    @if ($section === 'about')
+                        <div class="mb-1">
+                            <label class="form-label">{{ __('dashboard.second-image') }}</label>
+                            <div class="mb-2 p-1 border rounded bg-light-subtle">
+                                @if (isset($second_image) && is_object($second_image))
+                                    <img src="{{ $second_image->temporaryUrl() }}" width="180" class="img-fluid">
+                                @elseif(!empty($second_image))
+                                    <img src="{{ asset($second_image) }}" width="180" class="img-fluid">
+                                @endif
+                            </div>
+                            <input type="file" class="form-control" wire:model="second_image">
+                            @include('dashboard.includes.error', ['property' => 'second_image'])
+                        </div>
+                    @endif
                 @endif
             </div>
         @endforeach

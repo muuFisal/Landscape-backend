@@ -20,6 +20,7 @@ class AboutResource extends JsonResource
                 'title' => $this->about_title ?: $this->title,
                 'description' => $this->about_description ?: $this->desc,
                 'image' => $this->imageUrl($this->about_image ?: $this->image),
+                'second_image' => $this->imageUrl($this->second_image),
             ],
             'mission' => [
                 'badge' => $this->mission_badge,

@@ -120,6 +120,7 @@ return [
     'title' => 'Title',
     'description' => 'Description',
     'image' => 'Image',
+    'second-image' => 'Second Image',
     'created-at' => 'Created At',
     'whatsapp' => 'WhatsApp',
     'new-password' => 'New Password',

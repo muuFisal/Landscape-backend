@@ -120,6 +120,7 @@ return [
     'title' => 'العنوان',
     'description' => 'الوصف',
     'image' => 'الصورة',
+    'second-image' => 'الصورة الثانية',
     'created-at' => 'تاريخ الإضافة',
     'whatsapp' => 'واتساب',
     'new-password' => 'كلمة المرور الجديدة',
