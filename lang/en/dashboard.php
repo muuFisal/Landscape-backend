@@ -240,4 +240,6 @@ return [
     'slug' => 'Slug',
     'year' => 'Year',
     'wait' => 'Please Wait',
+    'cover-image' => 'Cover Image',
+    'home-image' => 'Homepage Image',
 ];

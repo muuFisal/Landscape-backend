@@ -20,6 +20,7 @@ class ProjectUpdate extends Component
     public $challenge_title_ar, $challenge_title_en, $challenge_description_ar, $challenge_description_en;
     public $solution_title_ar, $solution_title_en, $solution_description_ar, $solution_description_en;
     public $facts = [], $sort_order = 0, $status = 1;
+    public $cover_image;
     public $gallery_images = []; // Multi-upload for NEW gallery images
     public $existing_images = []; // To view current images
 
@@ -57,6 +58,7 @@ class ProjectUpdate extends Component
         $this->facts = is_array($this->project->facts) ? $this->project->facts : [];
         $this->sort_order = $this->project->sort_order;
         $this->status = $this->project->status;
+        $this->cover_image = $this->project->cover_image;
         $this->existing_images = $this->project->images()->orderBy('sort_order', 'asc')->get()->toArray();
         
         $this->dispatch('open-edit-modal');
@@ -105,6 +107,7 @@ class ProjectUpdate extends Component
             'solution_description_ar' => 'nullable|string',
             'solution_description_en' => 'nullable|string',
             'facts' => 'nullable|array',
+            'cover_image' => $this->cover_image instanceof TemporaryUploadedFile ? 'nullable|image|max:12288' : 'nullable',
             'gallery_images.*' => 'nullable|image|max:4096',
             'sort_order' => 'required|integer|min:0',
             'status' => 'required|boolean',
@@ -129,6 +132,13 @@ class ProjectUpdate extends Component
         $this->project->setTranslations('challenge_description', ['ar' => $this->challenge_description_ar, 'en' => $this->challenge_description_en]);
         $this->project->setTranslations('solution_title', ['ar' => $this->solution_title_ar, 'en' => $this->solution_title_en]);
         $this->project->setTranslations('solution_description', ['ar' => $this->solution_description_ar, 'en' => $this->solution_description_en]);
+        if ($this->cover_image instanceof UploadedFile) {
+            if (!empty($this->project->cover_image)) {
+                $this->imageManager->deleteImage($this->project->cover_image);
+            }
+            $this->project->cover_image = $this->imageManager->uploadImage('uploads/projects/covers', $this->cover_image, 'public');
+        }
+
         $this->project->save();
 
         if (!empty($this->gallery_images)) {

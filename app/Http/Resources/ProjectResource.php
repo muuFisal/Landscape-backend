@@ -19,7 +19,7 @@ class ProjectResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'short_description' => $this->short_description,
-            'cover_image' => $this->coverImage() ? asset($this->coverImage()->image) : null,
+            'cover_image' => $this->cover_image ? asset($this->cover_image) : ($this->coverImage() ? asset($this->coverImage()->image) : null),
             'year' => $this->year,
             'location' => $this->location,
             'area' => $this->area,

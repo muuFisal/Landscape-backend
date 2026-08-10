@@ -127,6 +127,21 @@
             </div>
 
             <hr class="my-2">
+            <h6 class="mb-1 text-primary">{{ __('dashboard.cover-image') }}</h6>
+            <div class="mb-1">
+                 <label class="form-label font-weight-bold">{{ __('dashboard.cover-image') }}</label>
+                 <div class="mb-1 p-1 border rounded bg-light-subtle">
+                     @if (isset($cover_image) && is_object($cover_image))
+                         <img src="{{ $cover_image->temporaryUrl() }}" width="180" class="img-fluid rounded border shadow-sm">
+                     @elseif (!empty($cover_image))
+                         <img src="{{ asset($cover_image) }}" width="180" class="img-fluid rounded border shadow-sm">
+                     @endif
+                 </div>
+                 <input type="file" class="form-control" wire:model="cover_image">
+                 @include('dashboard.includes.error', ['property' => 'cover_image'])
+            </div>
+
+            <hr class="my-2">
             <h6 class="mb-1 text-primary">{{ __('dashboard.project-gallery') }}</h6>
             
             <div class="row mb-2">

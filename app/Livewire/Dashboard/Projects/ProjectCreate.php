@@ -20,6 +20,7 @@ class ProjectCreate extends Component
     public $challenge_title_ar, $challenge_title_en, $challenge_description_ar, $challenge_description_en;
     public $solution_title_ar, $solution_title_en, $solution_description_ar, $solution_description_en;
     public $facts = [], $sort_order = 0, $status = 1;
+    public $cover_image;
     public $gallery_images = []; // Multi-upload for gallery
 
     protected ImageManger $imageManager;
@@ -51,6 +52,7 @@ class ProjectCreate extends Component
             'solution_description_ar' => 'nullable|string',
             'solution_description_en' => 'nullable|string',
             'facts' => 'nullable|array',
+            'cover_image' => 'nullable|image|max:12288',
             'gallery_images.*' => 'required|image|max:4096',
             'sort_order' => 'required|integer|min:0',
             'status' => 'required|boolean',
@@ -85,6 +87,10 @@ class ProjectCreate extends Component
             'sort_order' => $this->sort_order,
             'status' => $this->status,
         ];
+
+        if ($this->cover_image) {
+            $projectData['cover_image'] = $this->imageManager->uploadImage('uploads/projects/covers', $this->cover_image, 'public');
+        }
 
         $project = Project::create($projectData);
         $project->setTranslations('title', ['ar' => $this->title_ar, 'en' => $this->title_en]);

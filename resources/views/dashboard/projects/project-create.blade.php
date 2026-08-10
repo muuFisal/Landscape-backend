@@ -135,6 +135,20 @@
             </div>
 
             <hr class="my-2">
+            <h6 class="mb-1 text-primary">{{ __('dashboard.cover-image') }}</h6>
+            <div class="mb-1">
+                 <label class="form-label font-weight-bold">{{ __('dashboard.cover-image') }}</label>
+                 @if (isset($cover_image) && is_object($cover_image))
+                     <div class="mb-1">
+                         <img src="{{ $cover_image->temporaryUrl() }}" width="150" class="img-fluid rounded border shadow-sm">
+                     </div>
+                 @endif
+                 <input type="file" class="form-control" wire:model="cover_image">
+                 <p class="small text-muted mt-50">Select a single image for project cover.</p>
+                 @include('dashboard.includes.error', ['property' => 'cover_image'])
+            </div>
+
+            <hr class="my-2">
             <h6 class="mb-1 text-primary text-capitalize">{{ __('dashboard.project-gallery') }}</h6>
             <div class="mb-1">
                  <label class="form-label font-weight-bold">{{ __('dashboard.gallery-images') }}</label>

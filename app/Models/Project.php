@@ -15,6 +15,7 @@ class Project extends Model
         'service_id',
         'title',
         'slug',
+        'cover_image',
         'short_description',
         'year',
         'location',
