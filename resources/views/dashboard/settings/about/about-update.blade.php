@@ -77,6 +77,19 @@
                             <input type="file" class="form-control" wire:model="second_image">
                             @include('dashboard.includes.error', ['property' => 'second_image'])
                         </div>
+
+                        <div class="mb-1">
+                            <label class="form-label">{{ __('dashboard.home-image') }}</label>
+                            <div class="mb-2 p-1 border rounded bg-light-subtle">
+                                @if (isset($home_image) && is_object($home_image))
+                                    <img src="{{ $home_image->temporaryUrl() }}" width="180" class="img-fluid">
+                                @elseif(!empty($home_image))
+                                    <img src="{{ asset($home_image) }}" width="180" class="img-fluid">
+                                @endif
+                            </div>
+                            <input type="file" class="form-control" wire:model="home_image">
+                            @include('dashboard.includes.error', ['property' => 'home_image'])
+                        </div>
                     @endif
                 @endif
             </div>

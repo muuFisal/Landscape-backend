@@ -21,6 +21,7 @@ class AboutResource extends JsonResource
                 'description' => $this->about_description ?: $this->desc,
                 'image' => $this->imageUrl($this->about_image ?: $this->image),
                 'second_image' => $this->imageUrl($this->second_image),
+                'home_image' => $this->imageUrl($this->home_image ?: $this->about_image ?: $this->image),
             ],
             'mission' => [
                 'badge' => $this->mission_badge,

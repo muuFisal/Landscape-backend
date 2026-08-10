@@ -35,9 +35,9 @@ class About extends Model
     protected $fillable = [
         'banner',
         'title',
-        'desc',
         'image',
         'second_image',
+        'home_image',
         'about_badge',
         'about_title',
         'about_description',
