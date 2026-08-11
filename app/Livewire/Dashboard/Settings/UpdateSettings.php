@@ -39,20 +39,20 @@ class UpdateSettings extends Component
     public function mount(): void
     {
         $this->settings = Setting::query()->firstOrCreate([], [
-            'site_name' => ['ar' => 'MDO', 'en' => 'MDO'],
-            'site_title' => ['ar' => 'MDO Landscape', 'en' => 'MDO Landscape'],
+            'site_name' => ['ar' => 'CODE URBAN LANDSCAPE', 'en' => 'CODE URBAN LANDSCAPE'],
+            'site_title' => ['ar' => 'CODE URBAN LANDSCAPE', 'en' => 'CODE URBAN LANDSCAPE'],
             'site_desc' => ['ar' => 'Landscape studio', 'en' => 'Landscape studio'],
             'site_address' => ['ar' => 'Cairo, Egypt', 'en' => 'Cairo, Egypt'],
             'meta_key' => ['ar' => '', 'en' => ''],
             'meta_desc' => ['ar' => 'Landscape studio', 'en' => 'Landscape studio'],
             'site_phone' => '+201000000000',
-            'site_email' => 'info@mdo-landscape.com',
-            'email_support' => 'support@mdo-landscape.com',
+            'site_email' => 'info@code-urban.com',
+            'email_support' => 'support@code-urban.com',
             'logo' => 'uploads/images/logo.png',
             'light_logo' => 'uploads/images/logo.png',
             'dark_logo' => 'uploads/images/logo.png',
             'favicon' => 'uploads/images/logo.png',
-            'site_copyright' => '© '.now()->year.' MDO. All rights reserved.',
+            'site_copyright' => '© '.now()->year.' CODE URBAN LANDSCAPE. All rights reserved.',
             'promotion_url' => '#',
         ]);
 

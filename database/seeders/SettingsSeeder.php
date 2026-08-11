@@ -18,12 +18,12 @@ class SettingsSeeder extends Seeder
 
         $settingData = [
             'site_name' => [
-                'en' => 'MDO',
-                'ar' => 'MDO',
+                'en' => 'CODE URBAN LANDSCAPE',
+                'ar' => 'CODE URBAN LANDSCAPE',
             ],
             'site_title' => [
-                'en' => 'MDO Landscape Studio',
-                'ar' => 'استوديو MDO لتصميم اللاندسكيب',
+                'en' => 'CODE URBAN LANDSCAPE Studio',
+                'ar' => 'استوديو CODE URBAN LANDSCAPE لتصميم اللاندسكيب',
             ],
             'site_desc' => [
                 'en' => 'A boutique landscape studio shaped around modern restraint and premium execution.',
@@ -34,29 +34,29 @@ class SettingsSeeder extends Seeder
                 'ar' => 'القاهرة، مصر',
             ],
             'meta_key' => [
-                'en' => 'landscape, pool design, outdoor living, luxury landscape, villa garden, MDO',
-                'ar' => 'لاندسكيب، مسابح، تصميم خارجي، حدائق فلل، استوديو لاندسكيب، MDO',
+                'en' => 'landscape, pool design, outdoor living, luxury landscape, villa garden, CODE URBAN LANDSCAPE',
+                'ar' => 'لاندسكيب، مسابح، تصميم خارجي، حدائق فلل، استوديو لاندسكيب، CODE URBAN LANDSCAPE',
             ],
             'meta_desc' => [
-                'en' => 'MDO delivers refined landscape design, premium pools, and outdoor environments with a calm modern language.',
-                'ar' => 'تقدّم MDO تصميمات لاندسكيب راقية ومساحات خارجية ومسابح بلغة بصرية هادئة وعصرية.',
+                'en' => 'CODE URBAN LANDSCAPE delivers refined landscape design, premium pools, and outdoor environments with a calm modern language.',
+                'ar' => 'تقدّم CODE URBAN LANDSCAPE تصميمات لاندسكيب راقية ومساحات خارجية ومسابح بلغة بصرية هادئة وعصرية.',
             ],
             'site_phone' => '+201000000000',
-            'site_email' => 'info@mdo-landscape.com',
-            'email_support' => 'support@mdo-landscape.com',
-            'facebook' => 'https://facebook.com/mdolandscape',
-            'x_url' => 'https://x.com/mdolandscape',
-            'youtube' => 'https://youtube.com/@mdolandscape',
-            'instagram' => 'https://instagram.com/mdolandscape',
-            'tiktok' => 'https://tiktok.com/@mdolandscape',
-            'linkedin' => 'https://linkedin.com/company/mdolandscape',
+            'site_email' => 'info@code-urban.com',
+            'email_support' => 'support@code-urban.com',
+            'facebook' => 'https://facebook.com/codeurbanlandscape',
+            'x_url' => 'https://x.com/codeurbanlandscape',
+            'youtube' => 'https://youtube.com/@codeurbanlandscape',
+            'instagram' => 'https://instagram.com/codeurbanlandscape',
+            'tiktok' => 'https://tiktok.com/@codeurbanlandscape',
+            'linkedin' => 'https://linkedin.com/company/codeurbanlandscape',
             'whatsapp' => '+201000000000',
             'logo' => $defaultLogo,
             'light_logo' => $defaultLogo,
             'dark_logo' => $defaultLogo,
             'favicon' => $defaultLogo,
-            'site_copyright' => '© ' . now()->year . ' MDO Landscape Studio. All rights reserved.',
-            'promotion_url' => 'https://mdo-landscape.com/contact',
+            'site_copyright' => '© ' . now()->year . ' CODE URBAN LANDSCAPE Studio. All rights reserved.',
+            'promotion_url' => 'https://code-urban.com/contact',
         ];
 
         Setting::query()->updateOrCreate(['id' => 1], $settingData);
@@ -177,8 +177,8 @@ class SettingsSeeder extends Seeder
             [
                 'title' => ['en' => 'Terms & Conditions', 'ar' => 'الشروط والأحكام'],
                 'desc' => [
-                    'en' => 'By using the MDO website you agree to our terms regarding contact forms, project consultation, intellectual property, and content usage.',
-                    'ar' => 'باستخدامك لموقع MDO فإنك توافق على الشروط المتعلقة بطلبات التواصل والاستشارات وحقوق الملكية الفكرية واستخدام المحتوى.',
+                    'en' => 'By using the CODE URBAN LANDSCAPE website you agree to our terms regarding contact forms, project consultation, intellectual property, and content usage.',
+                    'ar' => 'باستخدامك لموقع CODE URBAN LANDSCAPE فإنك توافق على الشروط المتعلقة بطلبات التواصل والاستشارات وحقوق الملكية الفكرية واستخدام المحتوى.',
                 ],
                 'banner' => $defaultImage,
                 'image' => $defaultImage,

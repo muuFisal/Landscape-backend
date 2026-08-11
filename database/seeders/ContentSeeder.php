@@ -17,8 +17,8 @@ class ContentSeeder extends Seeder
         // 1. Why Choose Section
         $whyChoose = WhyChooseSection::updateOrCreate(['id' => 1], [
             'title' => [
-                'ar' => 'لماذا تختار MDO؟',
-                'en' => 'Why Choose MDO?',
+                'ar' => 'لماذا تختار CODE URBAN LANDSCAPE؟',
+                'en' => 'Why Choose CODE URBAN LANDSCAPE?',
             ],
             'description' => [
                 'ar' => 'نحن نقدم أفضل حلول التصميم الخارجي والحدائق مع التركيز على الجودة والابتكار.',
